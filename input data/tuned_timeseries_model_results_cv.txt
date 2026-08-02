@@ -1,0 +1,13 @@
+Tuned Timeseries DL Evaluation Results (5-Fold CV)
+====================================================
+
+Tuned 1D CNN:
+  [Train] Accuracy: 0.2494 | F1-Score: 0.1100 (Macro)
+  [Valid] Accuracy: 0.2440 | F1-Score: 0.1054 (Macro)
+  [Valid] Precision: 0.2506 | Recall: 0.2949 (Macro)
+
+Tuned BiLSTM:
+  [Train] Accuracy: 0.1875 | F1-Score: 0.0878 (Macro)
+  [Valid] Accuracy: 0.1861 | F1-Score: 0.0834 (Macro)
+  [Valid] Precision: 0.2503 | Recall: 0.2549 (Macro)
+

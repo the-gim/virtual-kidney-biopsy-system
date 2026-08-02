@@ -1,0 +1,10 @@
+Focused-Feature XGBoost — 4-Class Severity (MIMIC-IV only, 5-Fold CV):
+=========================================================================
+  Features      : creatinine, sodium, bun, albumin
+
+  [Train] F1    : 0.2432 (Macro)
+  [Valid] Acc   : 0.5970
+  [Valid] F1    : 0.1992 (Macro)
+  [Valid] Prec  : 0.2525 | Recall: 0.2852
+
+  Comparison: Previous best (all 115 features) = 0.2514 F1

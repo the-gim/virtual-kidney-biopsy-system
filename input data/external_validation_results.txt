@@ -1,0 +1,24 @@
+External Validation (Train: UCI CKD -> Test: MIMIC-IV)
+=======================================================
+
+Artificial Neural Network:
+  Accuracy:  0.0186
+  F1-Score:  0.0183 (Macro)
+  Precision: 0.0093 (Macro)
+  Recall:    0.5000 (Macro)
+  AUROC:     0.5041
+
+Support Vector Machine:
+  Accuracy:  0.0186
+  F1-Score:  0.0183 (Macro)
+  Precision: 0.0093 (Macro)
+  Recall:    0.5000 (Macro)
+  AUROC:     0.5420
+
+Decision Tree:
+  Accuracy:  0.0196
+  F1-Score:  0.0193 (Macro)
+  Precision: 0.4984 (Macro)
+  Recall:    0.4999 (Macro)
+  AUROC:     0.4999
+

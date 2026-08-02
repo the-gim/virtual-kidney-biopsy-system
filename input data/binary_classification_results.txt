@@ -1,0 +1,6 @@
+Binary Classification (Healthy vs Diseased) Results:
+  [Train] F1-Score: 0.4801 (Macro)
+  [Valid] F1-Score: 0.4660 (Macro)
+  [Valid] Precision: 0.5115 | Recall: 0.6128 (Macro)
+  [Valid] AUROC: 0.6503
+

@@ -1,0 +1,26 @@
+Feature Analysis Report
+========================
+Original Features: 160
+Selected Features: 115
+
+Top 20 Features by Mutual Information:
+Urine Color (51081)__length: 0.0138
+Urine Color (51081)__mean: 0.0137
+Urine Color (51081)__root_mean_square: 0.0131
+Urine Color (51081)__median: 0.0130
+Urine Color (51081)__absolute_maximum: 0.0122
+Urine Color (51081)__maximum: 0.0119
+Urine Color (51081)__minimum: 0.0119
+Urine Color (51081)__sum_values: 0.0083
+Urine Specific Gravity (51100)__length: 0.0067
+Urine Specific Gravity (51100)__absolute_maximum: 0.0057
+Potassium (50971)__length: 0.0051
+Urine Specific Gravity (51100)__maximum: 0.0051
+Potassium (Serum) (227442)__minimum: 0.0051
+Urine Specific Gravity (51100)__root_mean_square: 0.0045
+Sodium (50983)__sum_values: 0.0040
+Creatinine (50912)__length: 0.0040
+NBP Diastolic (220180)__minimum: 0.0040
+Albumin (50862)__length: 0.0037
+Bicarbonate (50882)__length: 0.0037
+Sodium (50983)__length: 0.0036

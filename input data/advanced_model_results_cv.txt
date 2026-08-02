@@ -1,0 +1,18 @@
+Advanced Model Evaluation Results (5-Fold CV)
+===============================================
+
+1D CNN:
+  [Train] Accuracy: 0.7673 | F1-Score: 0.3311 (Macro)
+  [Valid] Accuracy: 0.7427 | F1-Score: 0.2270 (Macro)
+  [Valid] Precision: 0.2537 | Recall: 0.2855 (Macro)
+
+LSTM:
+  [Train] Accuracy: 0.0656 | F1-Score: 0.0392 (Macro)
+  [Valid] Accuracy: 0.0644 | F1-Score: 0.0375 (Macro)
+  [Valid] Precision: 0.2503 | Recall: 0.3100 (Macro)
+
+XGBoost:
+  [Train] Accuracy: 0.9927 | F1-Score: 0.8946 (Macro)
+  [Valid] Accuracy: 0.9775 | F1-Score: 0.2602 (Macro)
+  [Valid] Precision: 0.2687 | Recall: 0.2580 (Macro)
+

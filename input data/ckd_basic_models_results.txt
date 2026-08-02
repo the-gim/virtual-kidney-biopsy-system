@@ -1,0 +1,24 @@
+UCI CKD Dataset - 3 Basic Models Evaluation (5-Fold CV)
+=======================================================
+
+Artificial Neural Network:
+  Accuracy:  0.9925
+  F1-Score:  0.9920 (Macro)
+  Precision: 0.9918 (Macro)
+  Recall:    0.9927 (Macro)
+  AUROC:     0.9999
+
+Support Vector Machine:
+  Accuracy:  0.9875
+  F1-Score:  0.9868 (Macro)
+  Precision: 0.9843 (Macro)
+  Recall:    0.9900 (Macro)
+  AUROC:     0.9999
+
+Decision Tree:
+  Accuracy:  0.9850
+  F1-Score:  0.9839 (Macro)
+  Precision: 0.9856 (Macro)
+  Recall:    0.9827 (Macro)
+  AUROC:     0.9822
+

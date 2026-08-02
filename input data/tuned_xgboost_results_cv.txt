@@ -1,0 +1,13 @@
+Tuned XGBoost Evaluation Results (5-Fold CV)
+===============================================
+
+Baseline XGBoost:
+  [Train] Accuracy: 0.9928 | F1-Score: 0.8944 (Macro)
+  [Valid] Accuracy: 0.9774 | F1-Score: 0.2581 (Macro)
+  [Valid] Precision: 0.2657 | Recall: 0.2564 (Macro)
+
+Tuned XGBoost:
+  [Train] Accuracy: 0.7405 | F1-Score: 0.2551 (Macro)
+  [Valid] Accuracy: 0.7346 | F1-Score: 0.2277 (Macro)
+  [Valid] Precision: 0.2548 | Recall: 0.2945 (Macro)
+

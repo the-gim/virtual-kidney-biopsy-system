@@ -1,0 +1,9 @@
+pandas
+numpy
+duckdb
+polars
+scikit-learn
+tsfresh
+spacy
+tqdm
+xgboost

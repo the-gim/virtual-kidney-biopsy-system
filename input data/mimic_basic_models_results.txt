@@ -1,0 +1,21 @@
+MIMIC-IV Dataset - 3 Basic Models Evaluation (4-Class Severity, 5-Fold CV)
+========================================================================
+
+Artificial Neural Network:
+  Accuracy:  0.9698
+  F1-Score:  0.2509 (Macro)
+  Precision: 0.2511 (Macro)
+  Recall:    0.2511 (Macro)
+
+Support Vector Machine:
+  Accuracy:  0.1658
+  F1-Score:  0.0774 (Macro)
+  Precision: 0.2456 (Macro)
+  Recall:    0.2211 (Macro)
+
+Decision Tree:
+  Accuracy:  0.3998
+  F1-Score:  0.1456 (Macro)
+  Precision: 0.2532 (Macro)
+  Recall:    0.2786 (Macro)
+

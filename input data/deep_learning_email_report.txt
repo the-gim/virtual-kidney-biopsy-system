@@ -1,0 +1,23 @@
+Deep Learning Methods Results (5-Fold Cross Validation)
+Dataset: 45,435 eICU patients (Class Imbalance: 0: ~98%, 1-3: ~2%)
+Data Format: Raw 3D Timeseries (12 time steps of 4 hours each, 16 features)
+=================================================================================
+
+Model: 1D CNN (Timeseries)
+----------------------------------------
+Accuracy (Overall): 0.5964
+Precision (Macro):  0.2518
+Recall (Macro):     0.2751
+F1-Score (Macro):   0.1983
+AUROC (Macro OVR):  0.5403
+AUPRC (Macro):      0.2513
+
+Model: LSTM (Timeseries)
+----------------------------------------
+Accuracy (Overall): 0.7007
+Precision (Macro):  0.2513
+Recall (Macro):     0.2664
+F1-Score (Macro):   0.2168
+AUROC (Macro OVR):  0.5359
+AUPRC (Macro):      0.2511
+

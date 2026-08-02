@@ -1,0 +1,12 @@
+XGBoost Binary Model — Merged MIMIC-IV + UCI CKD (5-Fold CV):
+================================================================
+  Dataset       : MIMIC-IV (45435 patients) + UCI CKD (400 patients)
+  Features used : creatinine, sodium, potassium, bun, specific_gravity, albumin, bp_mean
+
+  [Train] F1-Score : 0.5391 (Macro)
+  [Valid] Accuracy  : 0.8317
+  [Valid] F1-Score  : 0.5068 (Macro)
+  [Valid] Precision : 0.5222 | Recall: 0.6305
+  [Valid] AUROC     : 0.6677
+  [Valid] AUPRC     : 0.2779
+

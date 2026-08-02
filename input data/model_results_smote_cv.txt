@@ -1,0 +1,18 @@
+RQ1 Model Evaluation Results (5-Fold CV)
+========================================
+
+Artificial Neural Network:
+  [Train] Accuracy: 0.5181 | F1-Score: 0.2167 (Macro)
+  [Valid] Accuracy: 0.5013 | F1-Score: 0.1772 (Macro)
+  [Valid] Precision: 0.2514 | Recall: 0.2686 (Macro)
+
+Support Vector Machine:
+  [Train] Accuracy: 0.7894 | F1-Score: 0.3051 (Macro)
+  [Valid] Accuracy: 0.7695 | F1-Score: 0.2312 (Macro)
+  [Valid] Precision: 0.2534 | Recall: 0.2741 (Macro)
+
+Decision Tree:
+  [Train] Accuracy: 0.4038 | F1-Score: 0.1551 (Macro)
+  [Valid] Accuracy: 0.3997 | F1-Score: 0.1457 (Macro)
+  [Valid] Precision: 0.2534 | Recall: 0.2793 (Macro)
+

@@ -1,0 +1,9 @@
+XGBoost Binary Classification on UCI CKD Dataset (5-Fold CV):
+================================================================
+  [Train] F1-Score: 0.9933 (Macro)
+  [Valid] Accuracy:  0.9775
+  [Valid] F1-Score:  0.9761 (Macro)
+  [Valid] Precision: 0.9758 | Recall: 0.9767 (Macro)
+  [Valid] AUROC:     0.9982
+  [Valid] AUPRC:     0.9989
+

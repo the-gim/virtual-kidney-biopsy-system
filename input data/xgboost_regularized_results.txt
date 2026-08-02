@@ -1,0 +1,5 @@
+Aggressively Tuned XGBoost (CW):
+  [Train] Accuracy: 0.6880 | F1-Score: 0.2673 (Macro)
+  [Valid] Accuracy: 0.6815 | F1-Score: 0.2203 (Macro)
+  [Valid] Precision: 0.2562 | Recall: 0.3203 (Macro)
+

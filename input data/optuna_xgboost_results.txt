@@ -1,0 +1,12 @@
+Optuna Optimization Results:
+Best Validation F1-Score: 0.2625
+
+Best Parameters:
+  max_depth: 8
+  learning_rate: 0.01996924340264037
+  subsample: 0.6240539427424622
+  colsample_bytree: 0.42886115836272437
+  gamma: 3.3119700730778123
+  min_child_weight: 1
+  reg_alpha: 4.2466868970833875
+  reg_lambda: 0.007955346218028944

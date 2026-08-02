@@ -1,0 +1,21 @@
+eICU External Validation Results
+================================
+
+Artificial Neural Network:
+  Accuracy:  0.8408
+  Precision: 0.2102 (Macro Avg)
+  Recall:    0.2500 (Macro Avg)
+  F1-Score:  0.2284 (Macro Avg)
+
+Support Vector Machine:
+  Accuracy:  0.8408
+  Precision: 0.2102 (Macro Avg)
+  Recall:    0.2500 (Macro Avg)
+  F1-Score:  0.2284 (Macro Avg)
+
+Decision Tree:
+  Accuracy:  0.8114
+  Precision: 0.3032 (Macro Avg)
+  Recall:    0.2647 (Macro Avg)
+  F1-Score:  0.2568 (Macro Avg)
+

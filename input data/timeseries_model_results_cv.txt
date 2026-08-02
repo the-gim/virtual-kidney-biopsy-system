@@ -1,0 +1,13 @@
+Timeseries Deep Learning Models Evaluation Results (5-Fold CV)
+===============================================================
+
+1D CNN (Timeseries):
+  [Train] Accuracy: 0.6525 | F1-Score: 0.2183 (Macro)
+  [Valid] Accuracy: 0.6488 | F1-Score: 0.2073 (Macro)
+  [Valid] Precision: 0.2521 | Recall: 0.2729 (Macro)
+
+LSTM (Timeseries):
+  [Train] Accuracy: 0.6216 | F1-Score: 0.2099 (Macro)
+  [Valid] Accuracy: 0.6192 | F1-Score: 0.2024 (Macro)
+  [Valid] Precision: 0.2518 | Recall: 0.2771 (Macro)
+

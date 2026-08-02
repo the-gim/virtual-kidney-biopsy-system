@@ -1,0 +1,24 @@
+# Environments
+.venv/
+.env/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data, Compressed Files, and Models
+*.csv
+*.csv.gz
+*.gz
+*.parquet
+*.joblib
+*.arff
+*.npy
+*.pkl
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
