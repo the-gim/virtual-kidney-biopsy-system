@@ -1,0 +1,4 @@
+Model,Accuracy,F1 (Macro),Precision,Recall
+SVM,77.31%,0.7729,0.7737,0.7751
+ANN,76.56%,0.7640,0.7644,0.7637
+Decision Tree,74.41%,0.7439,0.7450,0.7462

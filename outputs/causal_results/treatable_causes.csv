@@ -1,0 +1,19 @@
+Feature,Category,Causal_Effect,Correlation,Treatable,Intervention
+phosphate_mean,minerals,0.0,0.4271,✅ Yes,Phosphate binders
+phosphate_max,minerals,0.0,0.3654,✅ Yes,Phosphate binders
+phosphate_std,minerals,0.0,0.3367,✅ Yes,Dietary management
+bicarbonate_min,acid_base,0.0,-0.2704,✅ Yes,Sodium bicarbonate
+potassium_mean,electrolytes,0.0,0.2196,✅ Yes,"Dietary restriction, Diuretics"
+bicarbonate_std,acid_base,0.0,0.2,✅ Yes,Acid-base management
+bicarbonate_mean,acid_base,0.0,-0.1991,✅ Yes,Sodium bicarbonate
+potassium_max,electrolytes,0.0,0.1816,✅ Yes,"Dietary restriction, Diuretics"
+potassium_std,electrolytes,0.0,0.1728,✅ Yes,Dietary management
+has_hypertension,demographics_comorbidities,-0.0828,-0.1476,✅ Yes,Antihypertensives (ACEi/ARB)
+hyperkalemia,electrolytes,0.0,0.1443,✅ Yes,Acute medical management
+phosphate_min,minerals,0.0,0.1396,✅ Yes,Phosphate management
+albumin_min,metabolic,0.0,-0.133,✅ Yes,Nutritional support
+albumin_mean,metabolic,0.0,-0.1306,✅ Yes,Protein diet management
+calcium_min,minerals,0.0,-0.1129,✅ Yes,Calcium supplements
+low_albumin,metabolic,0.0,0.1062,✅ Yes,Nutritional support
+sodium_std,electrolytes,0.0,0.0973,✅ Yes,Sodium balance management
+glucose_min,demographics_comorbidities,-0.0483,-0.0965,✅ Yes,Insulin/Metformin

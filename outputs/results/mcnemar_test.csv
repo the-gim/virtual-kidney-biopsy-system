@@ -1,0 +1,4 @@
+Comparison,Chi2,p-value,b (M1>M2),c (M2>M1),Significant
+SVM vs XGBoost,3.7835,0.0518,143,111,No
+SVM vs CNN,6.6706,0.0098,147,105,Yes
+XGBoost vs CNN,0.2935,0.588,143,133,No

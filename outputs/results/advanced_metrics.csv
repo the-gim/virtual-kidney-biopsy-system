@@ -1,0 +1,4 @@
+Model,Accuracy,F1 (Macro),Precision,Recall,Threshold
+XGBoost,77.42%,0.7732,0.7730,0.7736,0.44
+CNN,76.50%,0.7649,0.7663,0.7675,0.50
+LSTM,75.12%,0.7497,0.7499,0.7496,0.40

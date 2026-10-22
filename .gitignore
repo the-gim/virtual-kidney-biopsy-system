@@ -8,8 +8,8 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Data, Compressed Files, and Models
-*.csv
+# Raw Clinical Datasets (Protected under PhysioNet DUA & GitHub limits)
+input data/
 *.csv.gz
 *.gz
 *.parquet
@@ -17,8 +17,19 @@ __pycache__/
 *.arff
 *.npy
 *.pkl
+*.db
+*.sqlite
+*.sqlite3
 
-# IDEs and OS
+# Ignore general large CSVs but retain lightweight output results for dashboard
+*.csv
+!outputs/causal_results/*.csv
+!outputs/results/*.csv
+
+# Temporary files, Word locks, and OS
 .vscode/
 .idea/
 .DS_Store
+~$*.docx
+*.tmp
+

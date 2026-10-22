@@ -1,0 +1,4 @@
+Model Comparison,Model 1 F1 (Macro),Model 2 F1 (Macro),F1 Difference,Higher Performer,Chi-square,p-value,Significant
+XGBoost vs SVM,0.7732,0.7729,0.0003,XGBoost,3.6962,0.0545,No (Borderline)
+SVM vs CNN,0.7729,0.7649,0.0080,SVM,4.5709,0.0325,Yes
+XGBoost vs CNN,0.7732,0.7649,0.0083,XGBoost,0.0296,0.8634,No
