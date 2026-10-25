@@ -3,9 +3,13 @@ import pandas as pd
 import numpy as np
 import xgboost as xgb
 import os
+import sys
 import json
 import math
 from datetime import datetime
+
+# Ensure src/ is on the Python path (needed for Streamlit Cloud deployment)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from db_manager import (
     init_db, save_patient_record, get_all_records, seed_sample_patients,
