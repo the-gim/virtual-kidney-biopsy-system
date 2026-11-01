@@ -196,8 +196,8 @@ st.markdown("""
         max-width: 100% !important;
         width: 100% !important;
         margin: 0 !important;
-        padding-top: 0.4rem !important;
-        padding-bottom: 2.2rem !important;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.8rem !important;
         padding-left: 1.2rem !important;
         padding-right: 1.2rem !important;
         box-sizing: border-box !important;
@@ -314,8 +314,8 @@ st.markdown("""
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: 8px 16px;
-        margin-bottom: 0.6rem;
+        padding: 5px 14px;
+        margin-bottom: 0.4rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -374,7 +374,7 @@ st.markdown("""
         border-radius: 7px !important;
         border: 1px solid #e2e8f0 !important;
         gap: 4px !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 6px !important;
         overflow-x: visible !important;
         flex-wrap: nowrap !important;
     }
@@ -414,9 +414,9 @@ st.markdown("""
     div[data-testid="stTabs"] div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
         background-color: #f8fafc !important;
         border: 1px solid #e2e8f0 !important;
-        padding: 3px !important;
+        padding: 2px !important;
         border-radius: 6px !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
         display: flex !important;
         width: 100% !important;
     }
@@ -424,43 +424,96 @@ st.markdown("""
         flex: 1 1 0 !important;
         text-align: center !important;
         justify-content: center !important;
-        padding: 6px 4px !important;
-        font-size: 0.76rem !important;
+        padding: 5px 4px !important;
+        font-size: 0.75rem !important;
     }
 
-    /* Column Spacing & Zero-Cutoff Layout */
+    /* Equal Height & Screen-Fitting Dashboard Columns */
     div[data-testid="stHorizontalBlock"] {
-        gap: 12px !important;
+        gap: 14px !important;
         align-items: stretch !important;
+        display: flex !important;
+        width: 100% !important;
         overflow: visible !important;
     }
     div[data-testid="column"] {
         min-width: 0 !important;
         overflow: visible !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 0 !important;
+    }
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 100% !important;
+        height: 100% !important;
+        overflow: visible !important;
     }
 
-    /* Custom Bordered Containers (Cards) */
-    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+    /* Custom Bordered Containers (Cards) - Equal Height Stretched */
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
         background: #ffffff !important;
         border-radius: 8px !important;
         border: 1px solid #e2e8f0 !important;
         box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
-        margin-bottom: 12px !important;
-        padding-bottom: 14px !important;
+        margin-bottom: 0px !important;
+        padding: 12px 14px !important;
         box-sizing: border-box !important;
         width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 100% !important;
+        height: 100% !important;
         overflow: visible !important;
     }
 
     /* Inner vertical blocks within bordered containers */
     div[data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 100% !important;
+        height: 100% !important;
+        justify-content: space-between !important;
         overflow: visible !important;
     }
 
-    /* Tab panel within tabs */
+    /* Tab panel flex inside stretched cards */
+    div[data-testid="stTabs"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+    }
     div[data-testid="stTabs"] div[data-baseweb="tab-panel"] {
-        padding-bottom: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+        justify-content: space-between !important;
+        padding-bottom: 4px !important;
         overflow: visible !important;
+    }
+
+    /* Compact Number Inputs to Fit Screen Comfortably */
+    div[data-testid="stNumberInput"] {
+        margin-bottom: 3px !important;
+    }
+    div[data-testid="stNumberInput"] label p {
+        font-size: 0.74rem !important;
+        font-weight: 600 !important;
+        color: #475569 !important;
+        margin-bottom: 1px !important;
+    }
+    div[data-testid="stNumberInput"] div[data-baseweb="input"] {
+        height: 33px !important;
+        border-radius: 5px !important;
+    }
+    div[data-testid="stNumberInput"] div[data-baseweb="input"] input {
+        font-size: 0.80rem !important;
+        padding: 2px 6px !important;
+    }
+    div[data-testid="stNumberInput"] button {
+        height: 33px !important;
+        width: 30px !important;
     }
 
     /* Section Card Header */
@@ -485,12 +538,12 @@ st.markdown("""
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 6px;
-        padding: 6px 12px;
+        padding: 5px 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 8px;
-        font-size: 0.76rem;
+        margin-bottom: 6px;
+        font-size: 0.74rem;
     }
     .patient-strip-item {
         color: #64748b;
@@ -827,8 +880,8 @@ tab_biopsy, tab_registry, tab_research = st.tabs([
 # TAB 1: VIRTUAL BIOPSY ASSESSMENT
 # ====================================================
 with tab_biopsy:
-    # Tight gap to prevent canyon and avoid cutoffs
-    col_input, col_results = st.columns([1.0, 1.08], gap="small")
+    # Balanced 1:1 columns with generous gap for perfect screen fit
+    col_input, col_results = st.columns([1.0, 1.0], gap="medium")
 
     # ------------------ LEFT COLUMN: INPUT WORKSPACE ------------------
     with col_input:
@@ -919,7 +972,7 @@ with tab_biopsy:
             eff_bc_std = ov_bc_std if 'ov_bc_std' in locals() else auto_bc_std
             eff_alb_min = ov_alb_min if 'ov_alb_min' in locals() else auto_alb_min
 
-            st.markdown("<hr style='margin:10px 0 8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+            st.markdown("<hr style='margin:6px 0 6px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
             run_btn = st.button("Run Virtual Biopsy & Save Record", type="primary", use_container_width=True)
 
     # ------------------ RIGHT COLUMN: DIAGNOSTIC & SIMULATION WORKSPACE ------------------
