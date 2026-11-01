@@ -197,7 +197,7 @@ st.markdown("""
         width: 100% !important;
         margin: 0 !important;
         padding-top: 0.25rem !important;
-        padding-bottom: 0.8rem !important;
+        padding-bottom: 0.3rem !important;
         padding-left: 1.2rem !important;
         padding-right: 1.2rem !important;
         box-sizing: border-box !important;
@@ -446,13 +446,18 @@ st.markdown("""
     div[data-testid="column"] > div[data-testid="stVerticalBlock"] {
         display: flex !important;
         flex-direction: column !important;
-        flex: 1 1 100% !important;
+        flex: 1 1 auto !important;
+        flex-grow: 1 !important;
         height: 100% !important;
         overflow: visible !important;
     }
 
-    /* Custom Bordered Containers (Cards) - Equal Height Stretched */
-    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+    /* Custom Bordered Containers (Cards) - Equal Stretched to Screen Bottom */
+    html body .stApp div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"],
+    html body .stApp div[data-testid="stVerticalBlockBorderWrapper"],
+    html body [data-testid="stVerticalBlockBorderWrapper"],
+    div[data-testid="column"] [data-testid="stVerticalBlockBorderWrapper"],
+    [data-testid="stVerticalBlockBorderWrapper"] {
         background: #ffffff !important;
         border-radius: 8px !important;
         border: 1px solid #e2e8f0 !important;
@@ -463,37 +468,53 @@ st.markdown("""
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        flex: 1 1 100% !important;
+        flex: 1 1 auto !important;
+        flex-grow: 1 !important;
+        min-height: calc(100vh - 180px) !important;
         height: 100% !important;
-        overflow: visible !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
     /* Inner vertical blocks within bordered containers */
-    div[data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"] {
+    html body .stApp div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"],
+    [data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"] {
         display: flex !important;
         flex-direction: column !important;
-        flex: 1 1 100% !important;
+        flex: 1 1 auto !important;
+        flex-grow: 1 !important;
         height: 100% !important;
         justify-content: space-between !important;
         overflow: visible !important;
     }
 
-    /* Tab panel flex inside stretched cards */
-    div[data-testid="stTabs"] {
+    /* Stretched Tab components and panels within cards */
+    html body .stApp div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTabs"],
+    [data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTabs"] {
         display: flex !important;
         flex-direction: column !important;
         flex: 1 1 auto !important;
+        flex-grow: 1 !important;
+        min-height: 0 !important;
+        height: 100% !important;
     }
-    div[data-testid="stTabs"] div[data-baseweb="tab-panel"] {
+    html body .stApp div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTabs"] div[data-baseweb="tab-panel"],
+    [data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTabs"] div[data-baseweb="tab-panel"] {
         display: flex !important;
         flex-direction: column !important;
         flex: 1 1 auto !important;
+        flex-grow: 1 !important;
+        min-height: 0 !important;
+        height: 100% !important;
         justify-content: space-between !important;
-        padding-bottom: 4px !important;
+        padding-bottom: 2px !important;
         overflow: visible !important;
     }
+    [data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stTabs"] div[data-baseweb="tab-panel"] > div:last-child {
+        margin-top: auto !important;
+    }
 
-    /* Compact Number Inputs to Fit Screen Comfortably */
+    /* Proportional Number Inputs to Gracefully Fit Screen */
     div[data-testid="stNumberInput"] {
         margin-bottom: 3px !important;
     }
@@ -1068,9 +1089,6 @@ with tab_biopsy:
                 </div>
                 """, unsafe_allow_html=True)
 
-                # Diagnostic Biomarker Findings Grid (Responsive Flexbox, Zero Cutoff)
-                st.markdown('<div class="card-title-sm" style="margin-top:4px;margin-bottom:4px;"><span>Key Biomarker Status & Staging Correlates</span><span>Normal Range Comparison</span></div>', unsafe_allow_html=True)
-                
                 po4_status = "Elevated" if phosphate > 4.5 else ("Low" if phosphate < 2.5 else "Normal")
                 po4_color = "#991b1b" if phosphate > 4.5 else "#166534"
                 k_status = "Hyperkalemic" if potassium > 5.0 else ("Hypokalemic" if potassium < 3.5 else "Normal")
@@ -1080,30 +1098,33 @@ with tab_biopsy:
                 alb_status = "Depleted" if albumin < 3.5 else "Normal"
                 alb_color = "#9a3412" if albumin < 3.5 else "#166534"
 
+                # Diagnostic Biomarker Findings Grid (Anchored at Bottom, Zero Cutoff)
                 st.markdown(f"""
-                <div style="display:flex;gap:6px;margin-top:2px;margin-bottom:8px;width:100%;box-sizing:border-box;">
-                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
-                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Phosphate</div>
-                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{phosphate:.1f}</div>
-                        <div style="font-size:0.62rem;font-weight:600;color:{po4_color};line-height:1.2;">{po4_status}</div>
-                    </div>
-                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
-                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Potassium</div>
-                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{potassium:.1f}</div>
-                        <div style="font-size:0.62rem;font-weight:600;color:{k_color};line-height:1.2;">{k_status}</div>
-                    </div>
-                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
-                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Bicarbonate</div>
-                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{bicarbonate:.1f}</div>
-                        <div style="font-size:0.62rem;font-weight:600;color:{hco3_color};line-height:1.2;">{hco3_status}</div>
-                    </div>
-                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
-                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Albumin</div>
-                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{albumin:.1f}</div>
-                        <div style="font-size:0.62rem;font-weight:600;color:{alb_color};line-height:1.2;">{alb_status}</div>
+                <div style="margin-top:auto;padding-top:6px;">
+                    <div class="card-title-sm" style="margin-bottom:4px;"><span>Key Biomarker Status & Staging Correlates</span><span>Normal Range Comparison</span></div>
+                    <div style="display:flex;gap:6px;margin-top:2px;margin-bottom:4px;width:100%;box-sizing:border-box;">
+                        <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                            <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Phosphate</div>
+                            <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{phosphate:.1f}</div>
+                            <div style="font-size:0.62rem;font-weight:600;color:{po4_color};line-height:1.2;">{po4_status}</div>
+                        </div>
+                        <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                            <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Potassium</div>
+                            <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{potassium:.1f}</div>
+                            <div style="font-size:0.62rem;font-weight:600;color:{k_color};line-height:1.2;">{k_status}</div>
+                        </div>
+                        <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                            <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Bicarbonate</div>
+                            <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{bicarbonate:.1f}</div>
+                            <div style="font-size:0.62rem;font-weight:600;color:{hco3_color};line-height:1.2;">{hco3_status}</div>
+                        </div>
+                        <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                            <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Albumin</div>
+                            <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{albumin:.1f}</div>
+                            <div style="font-size:0.62rem;font-weight:600;color:{alb_color};line-height:1.2;">{alb_status}</div>
+                        </div>
                     </div>
                 </div>
-                <div style="height:4px;"></div>
                 """, unsafe_allow_html=True)
 
             with res_tab2:
