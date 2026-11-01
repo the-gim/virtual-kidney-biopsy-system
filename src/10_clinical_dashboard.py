@@ -45,67 +45,212 @@ st.markdown("""
     #MainMenu, footer { visibility: hidden; }
     div[data-testid="stDecoration"], div[data-testid="stStatusWidget"], .stDeployButton { display: none; }
 
-    /* Attached Sidebar Toggle Buttons (Clean Corporate Styling) */
-    [data-testid="stSidebarCollapseButton"] {
+    /* 1. Attached Sidebar Collapse Button (Inside Open Sidebar) */
+    div[data-testid="stSidebarHeader"] {
+        padding: 6px 12px 0 12px !important;
+        min-height: 36px !important;
+        height: 36px !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
         background: #ffffff !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+    }
+    button[aria-label*="ollapse" i],
+    button[data-testid*="ollapse" i],
+    section[data-testid="stSidebar"] button[kind="header"],
+    html body section[data-testid="stSidebar"] div[data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"] div[data-testid="stSidebarHeader"] button,
+    [data-testid="stSidebarCollapseButton"] {
+        background-color: #f1f5f9 !important;
         border: 1px solid #cbd5e1 !important;
         border-radius: 6px !important;
         color: #0f2744 !important;
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
         transition: all 0.15s ease-in-out !important;
     }
-    [data-testid="stSidebarCollapseButton"]:hover {
-        background: #f1f5f9 !important;
-        border-color: #94a3b8 !important;
+    button[aria-label*="ollapse" i] *,
+    button[data-testid*="ollapse" i] *,
+    section[data-testid="stSidebar"] button[kind="header"] *,
+    html body section[data-testid="stSidebar"] div[data-testid="stSidebarHeader"] button * {
         color: #0f2744 !important;
+        fill: #0f2744 !important;
+        stroke: #0f2744 !important;
+    }
+    button[aria-label*="ollapse" i]:hover,
+    button[data-testid*="ollapse" i]:hover,
+    section[data-testid="stSidebar"] button[kind="header"]:hover,
+    html body section[data-testid="stSidebar"] div[data-testid="stSidebarHeader"] button:hover {
+        background-color: #0f2744 !important;
+        border-color: #0f2744 !important;
+        color: #ffffff !important;
+    }
+    button[aria-label*="ollapse" i]:hover *,
+    button[data-testid*="ollapse" i]:hover *,
+    section[data-testid="stSidebar"] button[kind="header"]:hover *,
+    html body section[data-testid="stSidebar"] div[data-testid="stSidebarHeader"] button:hover * {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+        stroke: #ffffff !important;
     }
 
-    /* Dedicated Left-Attached Open Button when Sidebar is Closed */
-    [data-testid="collapsedControl"] {
+    /* 2. Pinned Left Expand Button When Sidebar is Closed */
+    html body div[data-testid="stSidebarCollapsedControl"],
+    html body div[data-testid="collapsedControl"],
+    div[data-testid="stSidebarCollapsedControl"],
+    div[data-testid="collapsedControl"],
+    html body > button[aria-label*="xpand" i],
+    .stApp > button[aria-label*="xpand" i] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        background-color: #0f2744 !important;
-        border: 1px solid #0f2744 !important;
-        border-radius: 0 6px 6px 0 !important;
-        color: #ffffff !important;
-        box-shadow: 2px 2px 6px rgba(15, 39, 68, 0.2) !important;
-        transition: all 0.15s ease-in-out !important;
         position: fixed !important;
         top: 14px !important;
-        left: 0 !important;
+        left: 12px !important;
         z-index: 999999 !important;
-        padding: 5px 8px !important;
     }
-    [data-testid="collapsedControl"]:hover {
-        background-color: #1e3a5f !important;
-        border-color: #1e3a5f !important;
+    div[data-testid="stSidebarCollapsedControl"] button,
+    div[data-testid="collapsedControl"] button,
+    button[aria-label*="xpand" i],
+    button[data-testid*="xpand" i],
+    button[data-testid="stSidebarNavSeparator"] {
+        background-color: #f1f5f9 !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 6px !important;
+        color: #0f2744 !important;
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px !important;
+        padding: 0 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.15s ease-in-out !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    div[data-testid="stSidebarCollapsedControl"] button *,
+    div[data-testid="collapsedControl"] button *,
+    button[aria-label*="xpand" i] *,
+    button[data-testid*="xpand" i] *,
+    button[data-testid="stSidebarNavSeparator"] * {
+        color: #0f2744 !important;
+        fill: #0f2744 !important;
+        stroke: #0f2744 !important;
+    }
+    div[data-testid="stSidebarCollapsedControl"] button:hover,
+    div[data-testid="collapsedControl"] button:hover,
+    button[aria-label*="xpand" i]:hover,
+    button[data-testid*="xpand" i]:hover,
+    button[data-testid="stSidebarNavSeparator"]:hover {
+        background-color: #0f2744 !important;
+        border-color: #0f2744 !important;
         color: #ffffff !important;
-        padding-left: 10px !important;
+    }
+    div[data-testid="stSidebarCollapsedControl"] button:hover *,
+    div[data-testid="collapsedControl"] button:hover *,
+    button[aria-label*="xpand" i]:hover *,
+    button[data-testid*="xpand" i]:hover *,
+    button[data-testid="stSidebarNavSeparator"]:hover * {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+        stroke: #ffffff !important;
     }
 
-    /* Layout: Stretches Full Width Automatically When Sidebar Collapses */
+    /* Hide expand button when sidebar is open */
+    .stApp:has(section[data-testid="stSidebar"][aria-expanded="true"]) div[data-testid="stSidebarCollapsedControl"],
+    .stApp:has(section[data-testid="stSidebar"][aria-expanded="true"]) div[data-testid="collapsedControl"],
+    .stApp:has(section[data-testid="stSidebar"][aria-expanded="true"]) button[aria-label*="xpand" i] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* 3. Fluid 100% Full-Width Expansion Across the Whole Screen */
+    html body .stApp .block-container,
+    html body .stApp div[data-testid="stMainBlockContainer"],
+    html body [data-testid="stMainBlockContainer"],
+    [data-testid="stMain"] .block-container,
+    [data-testid="stMainBlockContainer"],
+    div.block-container,
     .block-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
         padding-top: 0.4rem !important;
         padding-bottom: 0.8rem !important;
         padding-left: 1.2rem !important;
         padding-right: 1.2rem !important;
-        width: 100% !important;
-        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .stApp:has(section[data-testid="stSidebar"][aria-expanded="false"]) .block-container,
+    .stApp:has(section[data-testid="stSidebar"][aria-expanded="false"]) div[data-testid="stMainBlockContainer"] {
+        padding-left: 3.2rem !important;
+    }
+    @media (min-width: 576px) {
+        html body .stApp .block-container,
+        html body .stApp div[data-testid="stMainBlockContainer"],
+        html body [data-testid="stMainBlockContainer"],
+        .stApp [data-testid="stMainBlockContainer"],
+        div[data-testid="stMainBlockContainer"],
+        div.block-container,
+        .block-container {
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+    }
+    @media (min-width: 768px) {
+        html body .stApp .block-container,
+        html body .stApp div[data-testid="stMainBlockContainer"],
+        div[data-testid="stMainBlockContainer"],
+        div.block-container,
+        .block-container {
+            max-width: 100% !important;
+            width: 100% !important;
+        }
     }
 
     /* Minimal Institutional Navy Sidebar */
     section[data-testid="stSidebar"] {
-        width: 290px !important;
-        min-width: 260px !important;
-        max-width: 310px !important;
         background-color: #ffffff !important;
         border-right: 1px solid #e2e8f0 !important;
         box-shadow: 1px 0 4px rgba(0,0,0,0.02) !important;
     }
-    section[data-testid="stSidebar"] .block-container {
-        padding-top: 0.8rem !important;
+    section[data-testid="stSidebar"][aria-expanded="true"] {
+        width: 290px !important;
+        min-width: 260px !important;
+        max-width: 310px !important;
+    }
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        min-width: 0px !important;
+        width: 0px !important;
+        border-right: none !important;
+        box-shadow: none !important;
+    }
+    section[data-testid="stSidebar"] .block-container,
+    section[data-testid="stSidebar"] [data-testid="stMainBlockContainer"] {
+        padding-top: 0.2rem !important;
         padding-left: 0.8rem !important;
         padding-right: 0.8rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
     }
 
     /* Top Application Header */
