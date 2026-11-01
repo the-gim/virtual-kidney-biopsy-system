@@ -32,4 +32,5 @@ input data/
 .DS_Store
 ~$*.docx
 *.tmp
+*.zip
 
