@@ -542,6 +542,7 @@ def get_research_zip_bytes():
 
     buf = io.BytesIO()
     files_to_zip = [
+        ('outputs/results/00_README_RESULTS_INDEX.txt', '00_README_RESULTS_INDEX.txt'),
         ('outputs/results/all_models_benchmark.csv', '01_RQ1_all_models_benchmark.csv'),
         ('outputs/results/advanced_metrics.csv', '01b_RQ1_advanced_deep_learning_metrics.csv'),
         ('outputs/results/basic_metrics.csv', '01c_RQ1_basic_classifiers_metrics.csv'),
