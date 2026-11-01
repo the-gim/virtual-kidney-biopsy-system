@@ -236,9 +236,9 @@ st.markdown("""
         box-shadow: 1px 0 4px rgba(0,0,0,0.02) !important;
     }
     section[data-testid="stSidebar"][aria-expanded="true"] {
-        width: 290px !important;
-        min-width: 260px !important;
-        max-width: 310px !important;
+        width: 345px !important;
+        min-width: 320px !important;
+        max-width: 370px !important;
     }
     section[data-testid="stSidebar"][aria-expanded="false"] {
         min-width: 0px !important;
@@ -253,6 +253,60 @@ st.markdown("""
         padding-right: 0.8rem !important;
         max-width: 100% !important;
         width: 100% !important;
+    }
+
+    /* Sidebar Selectbox & Dropdown Popovers (Full Visibility, No Cutoff) */
+    div[data-baseweb="popover"] {
+        min-width: 340px !important;
+        max-width: 440px !important;
+        z-index: 99999 !important;
+    }
+    div[data-baseweb="popover"] [data-baseweb="menu"],
+    div[data-baseweb="popover"] ul[role="listbox"],
+    div[data-baseweb="popover"] div[role="listbox"] {
+        min-width: 100% !important;
+        padding: 4px !important;
+        border-radius: 6px !important;
+    }
+    div[data-baseweb="popover"] [role="option"] {
+        white-space: normal !important;
+        word-break: normal !important;
+        text-overflow: unset !important;
+        overflow: visible !important;
+        font-size: 0.80rem !important;
+        line-height: 1.35 !important;
+        padding: 8px 12px !important;
+        border-radius: 4px !important;
+    }
+    div[data-baseweb="popover"] [role="option"] * {
+        white-space: normal !important;
+        word-break: normal !important;
+        text-overflow: unset !important;
+        overflow: visible !important;
+    }
+
+    /* Sidebar Selectbox Trigger Styling */
+    section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+        border-radius: 6px !important;
+        font-size: 0.78rem !important;
+        border: 1px solid #cbd5e1 !important;
+        background-color: #ffffff !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div[data-baseweb="select"]:hover {
+        border-color: #0f2744 !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+        border-radius: 6px !important;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div[data-baseweb="select"] [data-testid="stMarkdownContainer"] p {
+        font-size: 0.78rem !important;
+        font-weight: 500 !important;
+        color: #0f2744 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
 
     /* Top Application Header */
@@ -591,6 +645,7 @@ FEATURE_ORDER = [
 # --- PRESETS (ALL 20 FEATURES CONFIGURED) ---
 PRESETS = {
     "New Patient (Custom Entry)": {
+        'diagnosis': 'Custom Clinical Intake',
         'id': 'PAT-NEW', 'name': '', 'age': 55, 'gender': 'Male',
         'htn': False, 'glucose_min': 95.0, 'avg_los': 3.0,
         'phosphate_mean': 3.5, 'phosphate_min': 3.0, 'phosphate_max': 4.0, 'phosphate_std': 0.3,
@@ -599,7 +654,8 @@ PRESETS = {
         'albumin_mean': 4.0, 'albumin_min': 3.8, 'low_albumin': False,
         'notes': ''
     },
-    "Case 1: Eleanor Vance (Diabetic Nephropathy)": {
+    "Case 1: Eleanor Vance (Diabetic)": {
+        'diagnosis': 'Diabetic Nephropathy (T2DM)',
         'id': 'PAT-9021', 'name': 'Eleanor Vance', 'age': 67, 'gender': 'Female',
         'htn': True, 'glucose_min': 185.0, 'avg_los': 14.0,
         'phosphate_mean': 6.2, 'phosphate_min': 5.4, 'phosphate_max': 7.4, 'phosphate_std': 1.2,
@@ -608,7 +664,8 @@ PRESETS = {
         'albumin_mean': 2.4, 'albumin_min': 2.0, 'low_albumin': True,
         'notes': 'Type 2 DM 15 yrs, severe HTN, peripheral edema.'
     },
-    "Case 2: Robert Sterling (Hypertensive Nephrosclerosis)": {
+    "Case 2: Robert Sterling (Hypertensive)": {
+        'diagnosis': 'Hypertensive Nephrosclerosis (HTN)',
         'id': 'PAT-5821', 'name': 'Robert Sterling', 'age': 59, 'gender': 'Male',
         'htn': True, 'glucose_min': 110.0, 'avg_los': 7.0,
         'phosphate_mean': 4.8, 'phosphate_min': 4.2, 'phosphate_max': 5.6, 'phosphate_std': 0.7,
@@ -617,7 +674,8 @@ PRESETS = {
         'albumin_mean': 3.1, 'albumin_min': 2.7, 'low_albumin': True,
         'notes': 'HTN 12 yrs, intermittent medication compliance.'
     },
-    "Case 3: Sarah Jenkins (Early Tubular Stress)": {
+    "Case 3: Sarah Jenkins (Tubular Stress)": {
+        'diagnosis': 'Early Tubular Stress (Pre-diabetes)',
         'id': 'PAT-8910', 'name': 'Sarah Jenkins', 'age': 44, 'gender': 'Female',
         'htn': False, 'glucose_min': 140.0, 'avg_los': 5.0,
         'phosphate_mean': 3.9, 'phosphate_min': 3.4, 'phosphate_max': 4.3, 'phosphate_std': 0.4,
@@ -626,7 +684,8 @@ PRESETS = {
         'albumin_mean': 3.5, 'albumin_min': 3.2, 'low_albumin': False,
         'notes': 'Pre-diabetes, mild microalbuminuria.'
     },
-    "Case 4: Arthur Pendelton (Healthy Baseline)": {
+    "Case 4: Arthur Pendelton (Healthy)": {
+        'diagnosis': 'Healthy Baseline Architecture',
         'id': 'PAT-1029', 'name': 'Arthur Pendelton', 'age': 38, 'gender': 'Male',
         'htn': False, 'glucose_min': 85.0, 'avg_los': 3.0,
         'phosphate_mean': 3.2, 'phosphate_min': 2.8, 'phosphate_max': 3.6, 'phosphate_std': 0.3,
@@ -669,8 +728,12 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     preset_keys = list(PRESETS.keys())
-    default_preset = st.session_state.get('selected_preset', preset_keys[1])
-    default_idx = preset_keys.index(default_preset) if default_preset in preset_keys else 0
+    saved_preset = st.session_state.get('selected_preset', preset_keys[1])
+    if saved_preset not in preset_keys:
+        matched = [k for k in preset_keys if k.startswith(str(saved_preset)[:6])]
+        saved_preset = matched[0] if matched else preset_keys[1]
+        st.session_state['selected_preset'] = saved_preset
+    default_idx = preset_keys.index(saved_preset)
 
     def _sync_preset():
         st.session_state['selected_preset'] = st.session_state['preset_selectbox']
@@ -684,6 +747,13 @@ with st.sidebar:
         on_change=_sync_preset
     )
     p = PRESETS[preset_choice]
+
+    st.markdown(f"""
+    <div style="font-size:0.71rem;color:#475569;margin:2px 0 6px 0;background:#f8fafc;padding:5px 9px;border-radius:5px;border:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+        <span>Clinical Subtype:</span>
+        <strong style="color:#0f2744;font-weight:600;">{p.get('diagnosis', 'Standard Assessment')}</strong>
+    </div>
+    """, unsafe_allow_html=True)
 
     c_btn1, c_btn2 = st.columns(2)
     with c_btn1:
