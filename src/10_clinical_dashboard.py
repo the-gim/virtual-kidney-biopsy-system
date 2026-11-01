@@ -21,7 +21,7 @@ st.set_page_config(
     page_title="Virtual Kidney Biopsy Portal",
     page_icon="🩺",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 # --- PROFESSIONAL MEDICAL CSS (NO-SCROLL SaaS DESIGN) ---
@@ -37,27 +37,59 @@ st.markdown("""
         color: #0f172a !important;
     }
 
+    /* Clean Streamlit Header & Preserve Sidebar Toggle */
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+        height: 2.8rem !important;
+        z-index: 99 !important;
+    }
+    #MainMenu { visibility: hidden; }
+    footer { visibility: hidden; }
+    div[data-testid="stDecoration"] { display: none; }
+    div[data-testid="stStatusWidget"] { display: none; }
+    .stDeployButton { display: none; }
+
+    /* Beautiful, Accessible Sidebar Hide/Open Buttons */
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background-color: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        color: #1d4ed8 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    [data-testid="stSidebarCollapseButton"]:hover,
+    [data-testid="collapsedControl"]:hover {
+        background-color: #eff6ff !important;
+        border-color: #93c5fd !important;
+        color: #1e40af !important;
+        transform: scale(1.05);
+    }
+
     /* Tighten Layout Padding to Avoid Scrolling */
     .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
+        padding-top: 0.6rem !important;
+        padding-bottom: 0.8rem !important;
+        padding-left: 1.4rem !important;
+        padding-right: 1.4rem !important;
         max-width: 100% !important;
     }
 
-    /* Clean Streamlit Defaults */
-    #MainMenu, footer, header {visibility: hidden;}
-    .stDeployButton {display: none;}
-
-    /* Sidebar Styling */
+    /* Minimal Professional Sidebar */
     section[data-testid="stSidebar"] {
+        width: 310px !important;
+        min-width: 280px !important;
+        max-width: 340px !important;
         background-color: #ffffff !important;
         border-right: 1px solid #e2e8f0 !important;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.02) !important;
+        box-shadow: 1px 0 6px rgba(0,0,0,0.02) !important;
     }
     section[data-testid="stSidebar"] .block-container {
-        padding-top: 1.2rem !important;
+        padding-top: 1rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
@@ -67,8 +99,8 @@ st.markdown("""
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: 12px 20px;
-        margin-bottom: 1rem;
+        padding: 10px 18px;
+        margin-bottom: 0.8rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -80,26 +112,26 @@ st.markdown("""
         gap: 12px;
     }
     .brand-icon {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         background: linear-gradient(135deg, #1d4ed8, #2563eb);
-        border-radius: 10px;
+        border-radius: 9px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 800;
         box-shadow: 0 2px 6px rgba(37,99,235,0.25);
     }
     .brand-text-title {
-        font-size: 1.15rem;
+        font-size: 1.12rem;
         font-weight: 700;
         color: #0f172a;
         line-height: 1.2;
     }
     .brand-text-sub {
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         font-weight: 500;
         color: #64748b;
         letter-spacing: 0.02em;
@@ -111,22 +143,22 @@ st.markdown("""
         background: #f0fdf4;
         border: 1px solid #bbf7d0;
         color: #15803d;
-        padding: 5px 12px;
+        padding: 4px 11px;
         border-radius: 20px;
-        font-size: 0.75rem;
+        font-size: 0.74rem;
         font-weight: 600;
         letter-spacing: 0.02em;
     }
     .pulse-dot {
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         background: #22c55e;
         border-radius: 50%;
         animation: pulse 2s infinite;
     }
     @keyframes pulse {
         0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
         100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
@@ -135,13 +167,9 @@ st.markdown("""
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: 16px 20px;
-        margin-bottom: 12px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        transition: border-color 0.2s ease;
-    }
-    .pro-card:hover {
-        border-color: #cbd5e1;
+        padding: 14px 18px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
     .card-title-sm {
         font-size: 0.72rem;
@@ -149,7 +177,7 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: #64748b;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -159,13 +187,13 @@ st.markdown("""
     .patient-strip {
         background: #f1f5f9;
         border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 8px 16px;
+        border-radius: 9px;
+        padding: 7px 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 12px;
-        font-size: 0.82rem;
+        margin-bottom: 10px;
+        font-size: 0.8rem;
     }
     .patient-strip-item {
         color: #64748b;
@@ -179,10 +207,10 @@ st.markdown("""
     .damage-pill {
         display: inline-flex;
         align-items: center;
-        padding: 5px 14px;
-        border-radius: 16px;
+        padding: 4px 12px;
+        border-radius: 14px;
         font-weight: 700;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         letter-spacing: 0.04em;
     }
     .pill-0 { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
@@ -192,53 +220,53 @@ st.markdown("""
 
     /* Action Treatment Cards */
     .action-box {
-        border-radius: 10px;
-        padding: 12px 16px;
-        margin-bottom: 10px;
-        font-size: 0.82rem;
+        border-radius: 9px;
+        padding: 11px 14px;
+        margin-bottom: 8px;
+        font-size: 0.81rem;
     }
     .action-disease {
         background: #f0fdf4;
         border: 1px solid #bbf7d0;
         border-left: 4px solid #16a34a;
     }
-    .action-disease .action-header { color: #15803d; font-weight: 700; margin-bottom: 4px; font-size: 0.85rem; }
+    .action-disease .action-header { color: #15803d; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
     
     .action-support {
         background: #fffbeb;
         border: 1px solid #fde68a;
         border-left: 4px solid #d97706;
     }
-    .action-support .action-header { color: #b45309; font-weight: 700; margin-bottom: 4px; font-size: 0.85rem; }
+    .action-support .action-header { color: #b45309; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
     
     .action-warning {
         background: #fef2f2;
         border: 1px solid #fecaca;
         border-left: 4px solid #dc2626;
     }
-    .action-warning .action-header { color: #b91c1c; font-weight: 700; margin-bottom: 4px; font-size: 0.85rem; }
+    .action-warning .action-header { color: #b91c1c; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
 
     /* Counterfactual Simulator Card */
     .sim-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 14px 18px;
+        border-radius: 9px;
+        padding: 12px 16px;
     }
 
     /* Tab Custom Styling */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+        gap: 6px;
         background-color: #f1f5f9;
         padding: 4px;
-        border-radius: 10px;
-        margin-bottom: 12px;
+        border-radius: 9px;
+        margin-bottom: 10px;
     }
     .stTabs [data-baseweb="tab"] {
-        border-radius: 8px !important;
-        font-size: 0.86rem !important;
+        border-radius: 7px !important;
+        font-size: 0.84rem !important;
         font-weight: 600 !important;
-        padding: 8px 16px !important;
+        padding: 7px 14px !important;
         color: #475569 !important;
         background-color: transparent !important;
         border: none !important;
@@ -246,17 +274,17 @@ st.markdown("""
     .stTabs [aria-selected="true"] {
         background-color: #ffffff !important;
         color: #1d4ed8 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.07) !important;
     }
 
     /* Metric adjustments */
     div[data-testid="stMetricValue"] {
-        font-size: 1.4rem !important;
+        font-size: 1.35rem !important;
         font-weight: 700 !important;
         color: #0f172a !important;
     }
     div[data-testid="stMetricLabel"] {
-        font-size: 0.72rem !important;
+        font-size: 0.7rem !important;
         font-weight: 600 !important;
         color: #64748b !important;
         text-transform: uppercase !important;
@@ -343,35 +371,38 @@ PRESETS = {
 
 # --- SVG GAUGE GENERATOR ---
 def make_gauge_svg(percent, color):
-    r = 58
-    cx, cy = 72, 72
+    r = 54
+    cx, cy = 68, 68
     circumference = 2 * math.pi * r
     offset = circumference * (1 - percent / 100)
     return f"""
-    <div style="display:flex;justify-content:center;margin:4px 0;">
-    <svg width="144" height="144" viewBox="0 0 144 144">
+    <div style="display:flex;justify-content:center;margin:2px 0;">
+    <svg width="136" height="136" viewBox="0 0 136 136">
         <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#e2e8f0" stroke-width="10"/>
         <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="10"
             stroke-dasharray="{circumference}" stroke-dashoffset="{offset}"
             stroke-linecap="round" transform="rotate(-90 {cx} {cy})"
             style="transition: stroke-dashoffset 0.8s ease;"/>
-        <text x="{cx}" y="{cy-4}" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">{percent:.1f}%</text>
-        <text x="{cx}" y="{cy+14}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600" letter-spacing="0.08em">RISK SCORE</text>
+        <text x="{cx}" y="{cy-3}" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">{percent:.1f}%</text>
+        <text x="{cx}" y="{cy+13}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600" letter-spacing="0.08em">RISK SCORE</text>
     </svg>
     </div>
     """
 
 # ====================================================
-# LEFT SIDEBAR: PATIENT MASTER & SYSTEM STATUS
+# MINIMAL PROFESSIONAL SIDEBAR: PATIENT MASTER
 # ====================================================
 with st.sidebar:
     st.markdown("""
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <div style="width:34px;height:34px;background:#2563eb;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">VB</div>
-        <div>
-            <div style="font-weight:700;font-size:0.95rem;color:#0f172a;line-height:1.2;">Patient Station</div>
-            <div style="font-size:0.72rem;color:#64748b;">Clinical Intake & Cohort</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">
+        <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:28px;height:28px;background:#2563eb;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8rem;">VB</div>
+            <div>
+                <div style="font-weight:700;font-size:0.88rem;color:#0f172a;line-height:1.1;">Patient Master</div>
+                <div style="font-size:0.7rem;color:#64748b;">Clinical Profile</div>
+            </div>
         </div>
+        <span style="font-size:0.68rem;background:#f0fdf4;color:#166534;padding:2px 8px;border-radius:12px;font-weight:600;border:1px solid #bbf7d0;">Active</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -394,19 +425,18 @@ with st.sidebar:
 
     c_btn1, c_btn2 = st.columns(2)
     with c_btn1:
-        if st.button("➕ Blank Form", use_container_width=True):
+        if st.button("➕ New Patient", use_container_width=True):
             st.session_state['selected_preset'] = "➕ New Patient (Custom Entry)"
             st.rerun()
     with c_btn2:
-        if st.button("👥 Sample Cohort", use_container_width=True):
+        if st.button("👥 Load Cohort", use_container_width=True):
             seed_sample_patients()
             st.toast("Sample cohort loaded into registry!", icon="👥")
 
-    st.markdown("<hr style='margin:12px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
-    st.markdown('<div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#64748b;margin-bottom:8px;">Active Patient Demographics</div>', unsafe_allow_html=True)
+    st.markdown("<hr style='margin:10px 0;border-color:#f1f5f9;'>", unsafe_allow_html=True)
 
     sb_id = st.text_input("Patient ID / MRN", value=p['id'] if p and p['id'] != 'PAT-NEW' else "PAT-0042")
-    sb_name = st.text_input("Full Name", value=p['name'] if p else "", placeholder="e.g. Eleanor Vance")
+    sb_name = st.text_input("Patient Full Name", value=p['name'] if p else "", placeholder="e.g. Eleanor Vance")
     
     col_a1, col_a2 = st.columns(2)
     with col_a1:
@@ -414,17 +444,24 @@ with st.sidebar:
     with col_a2:
         sb_gender = st.selectbox("Biological Sex", ["Male", "Female"], index=0 if (p and p['gender'] == 'Male') else 1)
 
-    sb_los = st.number_input("Hospital Inpatient Stay (Days)", min_value=1.0, max_value=60.0, value=float(p['avg_los']) if p else 4.0, step=1.0)
-    sb_notes = st.text_area("Encounter / Clinical Notes", value=p['notes'] if p else "", height=70)
+    with st.expander("📝 Stay & Clinical Notes", expanded=False):
+        sb_los = st.number_input("Inpatient Stay (Days)", min_value=1.0, max_value=60.0, value=float(p['avg_los']) if p else 4.0, step=1.0)
+        sb_notes = st.text_area("Encounter Notes", value=p['notes'] if p else "", height=60)
 
-    # Sidebar System Specs
-    st.markdown("<hr style='margin:14px 0 10px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+    # In case expander is collapsed and variables need default assignment
+    if 'sb_los' not in locals():
+        sb_los = float(p['avg_los']) if p else 4.0
+    if 'sb_notes' not in locals():
+        sb_notes = p['notes'] if p else ""
+
+    # Minimal System Status Footer
     st.markdown("""
-    <div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;font-size:0.75rem;color:#475569;line-height:1.6;">
-        <div><strong>AI Core:</strong> XGBoost (F1: 77.32%)</div>
-        <div><strong>Causal Engine:</strong> Pearl's SCM / DoWhy</div>
-        <div><strong>Leakage Control:</strong> Zero Cr / BUN Deriv.</div>
-        <div><strong>Local Persistence:</strong> SQLite Encrypted</div>
+    <div style="margin-top:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;font-size:0.7rem;color:#64748b;line-height:1.5;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+            <span style="width:6px;height:6px;background:#22c55e;border-radius:50%;"></span>
+            <strong style="color:#0f172a;">AI Core Connected</strong>
+        </div>
+        <div>XGBoost &bull; Pearl SCM &bull; SQLite DB</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -551,7 +588,7 @@ with tab_biopsy:
         eff_bc_std = ov_bc_std if 'ov_bc_std' in locals() else auto_bc_std
         eff_alb_min = ov_alb_min if 'ov_alb_min' in locals() else auto_alb_min
 
-        st.markdown("<hr style='margin:12px 0 10px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+        st.markdown("<hr style='margin:10px 0 8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
         run_btn = st.button("💾 Run Virtual Biopsy & Persist Record", type="primary", use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -631,18 +668,18 @@ with tab_biopsy:
         with res_tab1:
             r_top1, r_top2 = st.columns([1.5, 1.2])
             with r_top1:
-                st.markdown(f'<div style="margin-top:6px;"><span class="damage-pill {dbadge}">DAMAGE LEVEL {dlvl}</span></div>', unsafe_allow_html=True)
-                st.markdown(f"<div style='font-size:1.25rem;font-weight:700;color:#0f172a;margin:6px 0 2px 0;'>{dtitle}</div>", unsafe_allow_html=True)
-                st.markdown(f"<div style='color:#64748b;font-size:0.85rem;'>Estimated Interstitial Fibrosis: <strong style=\"color:{dcolor}\">{ifta}</strong></div>", unsafe_allow_html=True)
+                st.markdown(f'<div style="margin-top:4px;"><span class="damage-pill {dbadge}">DAMAGE LEVEL {dlvl}</span></div>', unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size:1.22rem;font-weight:700;color:#0f172a;margin:5px 0 2px 0;'>{dtitle}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='color:#64748b;font-size:0.83rem;'>Estimated Interstitial Fibrosis: <strong style=\"color:{dcolor}\">{ifta}</strong></div>", unsafe_allow_html=True)
             with r_top2:
                 st.markdown(make_gauge_svg(risk * 100, dcolor), unsafe_allow_html=True)
 
             st.markdown(f"""
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-top:6px;">
-                <div style="font-weight:700;color:#334155;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;">
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;margin-top:4px;">
+                <div style="font-weight:700;color:#334155;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;">
                     Microscopic Tissue Pathology Summary
                 </div>
-                <div style="color:#475569;font-size:0.83rem;line-height:1.5;">{micro}</div>
+                <div style="color:#475569;font-size:0.82rem;line-height:1.45;">{micro}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -674,11 +711,11 @@ with tab_biopsy:
             st.markdown(f"""
             <div class="action-box action-disease">
                 <div class="action-header">✅ Disease-Modifying Targets (Root Causes)</div>
-                <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.5;">{d_html}</ul>
+                <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.45;">{d_html}</ul>
             </div>
             <div class="action-box action-support">
                 <div class="action-header">⚠️ Supportive Care Only (Symptom Clearance)</div>
-                <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.5;">{s_html}</ul>
+                <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.45;">{s_html}</ul>
             </div>
             <div class="action-box action-warning">
                 <div class="action-header">🛑 Prescribing Safety Warning</div>
@@ -712,19 +749,19 @@ with tab_biopsy:
 
             st.markdown(f"""
             <div class="sim-box">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                    <span style="font-size:0.8rem;color:#475569;">Absolute Risk Reduction:</span>
-                    <span style="font-size:1.1rem;font-weight:700;color:#16a34a;">-{reduction*100:.1f}%</span>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <span style="font-size:0.78rem;color:#475569;">Absolute Risk Reduction:</span>
+                    <span style="font-size:1.05rem;font-weight:700;color:#16a34a;">-{reduction*100:.1f}%</span>
                 </div>
-                <div style="font-size:0.75rem;color:#64748b;margin-bottom:4px;">Baseline: {risk*100:.1f}%</div>
-                <div style="background:#e2e8f0;border-radius:6px;height:14px;overflow:hidden;margin-bottom:8px;">
+                <div style="font-size:0.73rem;color:#64748b;margin-bottom:3px;">Baseline: {risk*100:.1f}%</div>
+                <div style="background:#e2e8f0;border-radius:5px;height:12px;overflow:hidden;margin-bottom:6px;">
                     <div style="width:{risk*100:.0f}%;height:100%;background:{dcolor};"></div>
                 </div>
-                <div style="font-size:0.75rem;color:#64748b;margin-bottom:4px;">Projected Post-Intervention: {projected*100:.1f}%</div>
-                <div style="background:#e2e8f0;border-radius:6px;height:14px;overflow:hidden;margin-bottom:10px;">
+                <div style="font-size:0.73rem;color:#64748b;margin-bottom:3px;">Projected Post-Intervention: {projected*100:.1f}%</div>
+                <div style="background:#e2e8f0;border-radius:5px;height:12px;overflow:hidden;margin-bottom:8px;">
                     <div style="width:{projected*100:.0f}%;height:100%;background:{p_color};"></div>
                 </div>
-                <div style="font-size:0.82rem;color:#1e40af;font-weight:600;">
+                <div style="font-size:0.8rem;color:#1e40af;font-weight:600;">
                     Projected Histological Outcome: <span style="color:{p_color};">{p_label}</span>
                 </div>
             </div>
@@ -765,7 +802,7 @@ with tab_registry:
 
     df_records = get_all_records()
     if len(df_records) == 0:
-        st.info("No records in the database. Use '👥 Sample Cohort' in the sidebar or run a biopsy.")
+        st.info("No records in the database. Use '👥 Load Cohort' in the sidebar or run a biopsy.")
     else:
         # Metrics ribbon
         m1, m2, m3, m4, m5 = st.columns(5)
