@@ -197,7 +197,7 @@ st.markdown("""
         width: 100% !important;
         margin: 0 !important;
         padding-top: 0.4rem !important;
-        padding-bottom: 0.8rem !important;
+        padding-bottom: 2.2rem !important;
         padding-left: 1.2rem !important;
         padding-right: 1.2rem !important;
         box-sizing: border-box !important;
@@ -378,9 +378,11 @@ st.markdown("""
     div[data-testid="stHorizontalBlock"] {
         gap: 12px !important;
         align-items: stretch !important;
+        overflow: visible !important;
     }
     div[data-testid="column"] {
         min-width: 0 !important;
+        overflow: visible !important;
     }
 
     /* Custom Bordered Containers (Cards) */
@@ -389,9 +391,22 @@ st.markdown("""
         border-radius: 8px !important;
         border: 1px solid #e2e8f0 !important;
         box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 12px !important;
+        padding-bottom: 14px !important;
         box-sizing: border-box !important;
         width: 100% !important;
+        overflow: visible !important;
+    }
+
+    /* Inner vertical blocks within bordered containers */
+    div[data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"] {
+        overflow: visible !important;
+    }
+
+    /* Tab panel within tabs */
+    div[data-testid="stTabs"] div[data-baseweb="tab-panel"] {
+        padding-bottom: 8px !important;
+        overflow: visible !important;
     }
 
     /* Section Card Header */
@@ -922,7 +937,7 @@ with tab_biopsy:
                     st.markdown(make_gauge_svg(risk * 100, dcolor), unsafe_allow_html=True)
 
                 st.markdown(f"""
-                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 12px;margin:6px 0 8px 0;">
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:7px 11px;margin:5px 0 6px 0;">
                     <div style="font-weight:700;color:#0f2744;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;">
                         Microscopic Tissue Pathology Summary
                     </div>
@@ -931,7 +946,7 @@ with tab_biopsy:
                 """, unsafe_allow_html=True)
 
                 # Diagnostic Biomarker Findings Grid (Responsive Flexbox, Zero Cutoff)
-                st.markdown('<div class="card-title-sm" style="margin-top:6px;"><span>Key Biomarker Status & Staging Correlates</span><span>Normal Range Comparison</span></div>', unsafe_allow_html=True)
+                st.markdown('<div class="card-title-sm" style="margin-top:4px;margin-bottom:4px;"><span>Key Biomarker Status & Staging Correlates</span><span>Normal Range Comparison</span></div>', unsafe_allow_html=True)
                 
                 po4_status = "Elevated" if phosphate > 4.5 else ("Low" if phosphate < 2.5 else "Normal")
                 po4_color = "#991b1b" if phosphate > 4.5 else "#166534"
@@ -943,7 +958,7 @@ with tab_biopsy:
                 alb_color = "#9a3412" if albumin < 3.5 else "#166534"
 
                 st.markdown(f"""
-                <div style="display:flex;gap:6px;margin-top:2px;width:100%;box-sizing:border-box;">
+                <div style="display:flex;gap:6px;margin-top:2px;margin-bottom:8px;width:100%;box-sizing:border-box;">
                     <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
                         <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Phosphate</div>
                         <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{phosphate:.1f}</div>
@@ -965,6 +980,7 @@ with tab_biopsy:
                         <div style="font-size:0.62rem;font-weight:600;color:{alb_color};line-height:1.2;">{alb_status}</div>
                     </div>
                 </div>
+                <div style="height:4px;"></div>
                 """, unsafe_allow_html=True)
 
             with res_tab2:
@@ -1003,6 +1019,7 @@ with tab_biopsy:
                     <div class="action-header">Clinical Prescribing Advisory</div>
                     Elevated phosphate and potassium are passive consequences of decreased nephron clearance. Lowering them resolves acute lab numbers but does not slow renal scarring. Interventional priority must remain on BP and glucose.
                 </div>
+                <div style="height:4px;"></div>
                 """, unsafe_allow_html=True)
 
             with res_tab3:
@@ -1047,6 +1064,7 @@ with tab_biopsy:
                         Projected Histological Outcome: <span style="color:{p_color};">{p_label}</span>
                     </div>
                 </div>
+                <div style="height:4px;"></div>
                 """, unsafe_allow_html=True)
 
         if run_btn:
