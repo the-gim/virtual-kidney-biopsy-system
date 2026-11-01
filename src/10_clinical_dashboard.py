@@ -39,7 +39,7 @@ st.markdown("""
     /* Unobtrusive Clean Header */
     header[data-testid="stHeader"] {
         background: transparent !important;
-        height: 2.5rem !important;
+        height: 2.4rem !important;
         z-index: 99 !important;
     }
     #MainMenu, footer { visibility: hidden; }
@@ -85,27 +85,27 @@ st.markdown("""
 
     /* Layout: Stretches Full Width Automatically When Sidebar Collapses */
     .block-container {
-        padding-top: 0.5rem !important;
+        padding-top: 0.4rem !important;
         padding-bottom: 0.8rem !important;
-        padding-left: 1.4rem !important;
-        padding-right: 1.4rem !important;
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
         width: 100% !important;
         max-width: 100% !important;
     }
 
     /* Minimal Institutional Navy Sidebar */
     section[data-testid="stSidebar"] {
-        width: 300px !important;
-        min-width: 270px !important;
-        max-width: 320px !important;
+        width: 290px !important;
+        min-width: 260px !important;
+        max-width: 310px !important;
         background-color: #ffffff !important;
         border-right: 1px solid #e2e8f0 !important;
         box-shadow: 1px 0 4px rgba(0,0,0,0.02) !important;
     }
     section[data-testid="stSidebar"] .block-container {
         padding-top: 0.8rem !important;
-        padding-left: 0.9rem !important;
-        padding-right: 0.9rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
     }
 
     /* Top Application Header */
@@ -113,8 +113,8 @@ st.markdown("""
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: 10px 18px;
-        margin-bottom: 0.65rem;
+        padding: 8px 16px;
+        margin-bottom: 0.6rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -123,25 +123,25 @@ st.markdown("""
     .brand-group {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
     .brand-tag {
         background: #0f2744;
         color: #ffffff;
         font-weight: 800;
-        font-size: 0.82rem;
-        padding: 6px 10px;
-        border-radius: 6px;
+        font-size: 0.8rem;
+        padding: 5px 9px;
+        border-radius: 5px;
         letter-spacing: 0.05em;
     }
     .brand-text-title {
-        font-size: 1.1rem;
+        font-size: 1.08rem;
         font-weight: 700;
         color: #0f2744;
         line-height: 1.2;
     }
     .brand-text-sub {
-        font-size: 0.74rem;
+        font-size: 0.72rem;
         font-weight: 500;
         color: #64748b;
         letter-spacing: 0.02em;
@@ -153,9 +153,9 @@ st.markdown("""
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         color: #0f2744;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.72rem;
+        padding: 4px 9px;
+        border-radius: 5px;
+        font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 0.02em;
     }
@@ -166,31 +166,36 @@ st.markdown("""
         border-radius: 50%;
     }
 
-    /* Professional Rounded Tab Selection with Proper Padding */
+    /* Professional Rounded Tab Selection (No Cutoff, No Scroll Chevron) */
     div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
         background-color: #f1f5f9 !important;
-        padding: 4px 6px !important;
-        border-radius: 8px !important;
+        padding: 3px 4px !important;
+        border-radius: 7px !important;
         border: 1px solid #e2e8f0 !important;
         gap: 4px !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 10px !important;
+        overflow-x: visible !important;
+        flex-wrap: nowrap !important;
     }
-    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] [data-baseweb="tab-border"] {
+    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] [data-baseweb="tab-border"],
+    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] [data-baseweb="tab-highlight"],
+    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] button[aria-label="Previous slide"],
+    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] button[aria-label="Next slide"] {
         display: none !important;
-    }
-    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] [data-baseweb="tab-highlight"] {
-        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
     }
     div[data-testid="stTabs"] > div[data-baseweb="tab-list"] button[data-baseweb="tab"] {
-        border-radius: 6px !important;
-        font-size: 0.82rem !important;
+        border-radius: 5px !important;
+        font-size: 0.8rem !important;
         font-weight: 600 !important;
-        padding: 7px 16px !important;
+        padding: 6px 12px !important;
         color: #475569 !important;
         background-color: transparent !important;
         border: 1px solid transparent !important;
         margin: 0 !important;
         height: auto !important;
+        white-space: nowrap !important;
         transition: all 0.15s ease-in-out !important;
     }
     div[data-testid="stTabs"] > div[data-baseweb="tab-list"] button[data-baseweb="tab"]:hover {
@@ -201,20 +206,34 @@ st.markdown("""
         background-color: #ffffff !important;
         color: #0f2744 !important;
         border: 1px solid #cbd5e1 !important;
-        box-shadow: 0 1px 3px rgba(15, 39, 68, 0.08) !important;
+        box-shadow: 0 1px 2px rgba(15, 39, 68, 0.06) !important;
     }
 
-    /* Nested Sub-tabs Styling */
+    /* Nested Sub-tabs Styling: Equal 3-way distribution across container */
     div[data-testid="stTabs"] div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
         background-color: #f8fafc !important;
         border: 1px solid #e2e8f0 !important;
-        padding: 3px 4px !important;
+        padding: 3px !important;
         border-radius: 6px !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
+        display: flex !important;
+        width: 100% !important;
     }
     div[data-testid="stTabs"] div[data-testid="stTabs"] > div[data-baseweb="tab-list"] button[data-baseweb="tab"] {
-        padding: 5px 12px !important;
-        font-size: 0.78rem !important;
+        flex: 1 1 0 !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 6px 4px !important;
+        font-size: 0.76rem !important;
+    }
+
+    /* Column Spacing & Zero-Cutoff Layout */
+    div[data-testid="stHorizontalBlock"] {
+        gap: 12px !important;
+        align-items: stretch !important;
+    }
+    div[data-testid="column"] {
+        min-width: 0 !important;
     }
 
     /* Custom Bordered Containers (Cards) */
@@ -223,22 +242,26 @@ st.markdown("""
         border-radius: 8px !important;
         border: 1px solid #e2e8f0 !important;
         box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
     }
 
     /* Section Card Header */
     .card-title-sm {
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
         color: #475569;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
         border-bottom: 1px solid #f1f5f9;
-        padding-bottom: 6px;
+        padding-bottom: 5px;
     }
 
     /* Patient Identity Strip */
@@ -250,8 +273,8 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 10px;
-        font-size: 0.78rem;
+        margin-bottom: 8px;
+        font-size: 0.76rem;
     }
     .patient-strip-item {
         color: #64748b;
@@ -265,10 +288,10 @@ st.markdown("""
     .damage-pill {
         display: inline-flex;
         align-items: center;
-        padding: 3px 10px;
+        padding: 3px 9px;
         border-radius: 4px;
         font-weight: 700;
-        font-size: 0.75rem;
+        font-size: 0.74rem;
         letter-spacing: 0.04em;
     }
     .pill-0 { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
@@ -279,37 +302,37 @@ st.markdown("""
     /* Clinical Guidance Action Boxes */
     .action-box {
         border-radius: 6px;
-        padding: 10px 12px;
+        padding: 9px 12px;
         margin-bottom: 8px;
-        font-size: 0.8rem;
+        font-size: 0.79rem;
     }
     .action-disease {
         background: #f8fafc;
         border: 1px solid #cbd5e1;
         border-left: 4px solid #0f2744;
     }
-    .action-disease .action-header { color: #0f2744; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
+    .action-disease .action-header { color: #0f2744; font-weight: 700; margin-bottom: 3px; font-size: 0.81rem; }
     
     .action-support {
         background: #fefce8;
         border: 1px solid #fef08a;
         border-left: 4px solid #854d0e;
     }
-    .action-support .action-header { color: #854d0e; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
+    .action-support .action-header { color: #854d0e; font-weight: 700; margin-bottom: 3px; font-size: 0.81rem; }
     
     .action-warning {
         background: #fef2f2;
         border: 1px solid #fecaca;
         border-left: 4px solid #991b1b;
     }
-    .action-warning .action-header { color: #991b1b; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
+    .action-warning .action-header { color: #991b1b; font-weight: 700; margin-bottom: 3px; font-size: 0.81rem; }
 
     /* Counterfactual Simulator Card */
     .sim-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 6px;
-        padding: 12px 14px;
+        padding: 11px 13px;
     }
 
     /* Primary Navy Button Override */
@@ -319,8 +342,8 @@ st.markdown("""
         border: 1px solid #0f2744 !important;
         border-radius: 6px !important;
         font-weight: 600 !important;
-        font-size: 0.84rem !important;
-        padding: 0.5rem 1rem !important;
+        font-size: 0.82rem !important;
+        padding: 0.45rem 0.9rem !important;
         transition: background-color 0.15s ease !important;
     }
     div.stButton > button[kind="primary"]:hover {
@@ -332,7 +355,7 @@ st.markdown("""
     /* Secondary Buttons */
     div.stButton > button {
         border-radius: 6px !important;
-        font-size: 0.8rem !important;
+        font-size: 0.78rem !important;
         border: 1px solid #cbd5e1 !important;
         color: #1e293b !important;
     }
@@ -422,20 +445,20 @@ PRESETS = {
 
 # --- SVG GAUGE GENERATOR ---
 def make_gauge_svg(percent, color):
-    r = 52
-    cx, cy = 66, 66
+    r = 46
+    cx, cy = 56, 56
     circumference = 2 * math.pi * r
     offset = circumference * (1 - percent / 100)
     return f"""
-    <div style="display:flex;justify-content:center;margin:2px 0;">
-    <svg width="132" height="132" viewBox="0 0 132 132">
-        <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#e2e8f0" stroke-width="10"/>
-        <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="10"
+    <div style="display:flex;justify-content:center;align-items:center;margin:0;width:100%;">
+    <svg width="112" height="112" viewBox="0 0 112 112" style="max-width:100%;height:auto;">
+        <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+        <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="8"
             stroke-dasharray="{circumference}" stroke-dashoffset="{offset}"
             stroke-linecap="round" transform="rotate(-90 {cx} {cy})"
             style="transition: stroke-dashoffset 0.8s ease;"/>
-        <text x="{cx}" y="{cy-3}" text-anchor="middle" font-size="22" font-weight="700" fill="#0f2744">{percent:.1f}%</text>
-        <text x="{cx}" y="{cy+13}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600" letter-spacing="0.08em">RISK SCORE</text>
+        <text x="{cx}" y="{cy-2}" text-anchor="middle" font-size="20" font-weight="700" fill="#0f2744">{percent:.1f}%</text>
+        <text x="{cx}" y="{cy+12}" text-anchor="middle" font-size="8.5" fill="#64748b" font-weight="600" letter-spacing="0.08em">RISK SCORE</text>
     </svg>
     </div>
     """
@@ -540,17 +563,19 @@ tab_biopsy, tab_registry, tab_research = st.tabs([
 # TAB 1: VIRTUAL BIOPSY ASSESSMENT
 # ====================================================
 with tab_biopsy:
-    col_input, col_results = st.columns([1.0, 1.35], gap="large")
+    # Tight gap to prevent canyon and avoid cutoffs
+    col_input, col_results = st.columns([1.0, 1.08], gap="small")
 
     # ------------------ LEFT COLUMN: INPUT WORKSPACE ------------------
     with col_input:
         with st.container(border=True):
             st.markdown('<div class="card-title-sm"><span>Clinical Biomarker Intake</span><span>MIMIC-IV Normalized</span></div>', unsafe_allow_html=True)
 
+            # Short concise titles to prevent overflow and scroll chevrons
             input_subtab1, input_subtab2, input_subtab3 = st.tabs([
-                "Laboratory Biomarkers",
-                "Etiologic Risk Factors",
-                "Feature Parameters & Overrides"
+                "Routine Labs",
+                "Root Causes",
+                "Feature Details"
             ])
 
             with input_subtab1:
@@ -599,7 +624,7 @@ with tab_biopsy:
 
             with input_subtab3:
                 st.markdown(f"""
-                <div style="font-size:0.75rem;color:#334155;line-height:1.65;">
+                <div style="font-size:0.74rem;color:#334155;line-height:1.65;">
                     <div>Phosphate: Min <code>{auto_ph_min:.2f}</code> | Max <code>{auto_ph_max:.2f}</code> | Std <code>{auto_ph_std:.2f}</code></div>
                     <div>Potassium: Max <code>{auto_k_max:.2f}</code> | Std <code>{auto_k_std:.2f}</code> | Hyperkalemia: <code>{'Yes' if auto_hyperk else 'No'}</code></div>
                     <div>Acid-Base: HCO3 Min <code>{auto_bc_min:.1f}</code> | Std <code>{auto_bc_std:.2f}</code> | Ca Min <code>{calcium:.1f}</code></div>
@@ -702,74 +727,66 @@ with tab_biopsy:
             """, unsafe_allow_html=True)
 
             res_tab1, res_tab2, res_tab3 = st.tabs([
-                "Histopathological Risk",
-                "Clinical Guidance",
-                "Counterfactual Simulator"
+                "Histopathology",
+                "Treatment Plan",
+                "What-If Simulator"
             ])
 
             with res_tab1:
-                r_top1, r_top2 = st.columns([1.5, 1.1])
+                r_top1, r_top2 = st.columns([1.7, 1.0], gap="small")
                 with r_top1:
                     st.markdown(f'<div style="margin-top:2px;"><span class="damage-pill {dbadge}">DAMAGE LEVEL {dlvl}</span></div>', unsafe_allow_html=True)
                     st.markdown(f"<div style='font-size:1.15rem;font-weight:700;color:#0f2744;margin:4px 0 2px 0;'>{dtitle}</div>", unsafe_allow_html=True)
                     st.markdown(f"<div style='color:#64748b;font-size:0.8rem;margin-bottom:2px;'>Chronic Scarring: <strong style=\"color:{dcolor}\">{ifta}</strong></div>", unsafe_allow_html=True)
-                    st.markdown(f"<div style='color:#475569;font-size:0.76rem;'>Staging Equivalent: <strong>{kdigo_grade}</strong></div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='color:#475569;font-size:0.75rem;'>Staging Equivalent: <strong>{kdigo_grade}</strong></div>", unsafe_allow_html=True)
                 with r_top2:
                     st.markdown(make_gauge_svg(risk * 100, dcolor), unsafe_allow_html=True)
 
                 st.markdown(f"""
-                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 12px;margin:6px 0 10px 0;">
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 12px;margin:6px 0 8px 0;">
                     <div style="font-weight:700;color:#0f2744;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;">
                         Microscopic Tissue Pathology Summary
                     </div>
-                    <div style="color:#334155;font-size:0.79rem;line-height:1.45;">{micro}</div>
+                    <div style="color:#334155;font-size:0.78rem;line-height:1.45;">{micro}</div>
                 </div>
                 """, unsafe_allow_html=True)
 
-                # Diagnostic Biomarker Findings Grid (Fills Right Column to Match Height)
+                # Diagnostic Biomarker Findings Grid (Responsive Flexbox, Zero Cutoff)
                 st.markdown('<div class="card-title-sm" style="margin-top:6px;"><span>Key Biomarker Status & Staging Correlates</span><span>Normal Range Comparison</span></div>', unsafe_allow_html=True)
                 
-                f_c1, f_c2, f_c3, f_c4 = st.columns(4)
-                with f_c1:
-                    po4_status = "Elevated" if phosphate > 4.5 else ("Low" if phosphate < 2.5 else "Normal")
-                    po4_color = "#991b1b" if phosphate > 4.5 else "#166534"
-                    st.markdown(f"""
-                    <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:0.65rem;color:#64748b;text-transform:uppercase;font-weight:600;">Phosphate</div>
-                        <div style="font-size:0.9rem;font-weight:700;color:#0f2744;">{phosphate:.1f}</div>
-                        <div style="font-size:0.68rem;font-weight:600;color:{po4_color};">{po4_status}</div>
+                po4_status = "Elevated" if phosphate > 4.5 else ("Low" if phosphate < 2.5 else "Normal")
+                po4_color = "#991b1b" if phosphate > 4.5 else "#166534"
+                k_status = "Hyperkalemic" if potassium > 5.0 else ("Hypokalemic" if potassium < 3.5 else "Normal")
+                k_color = "#991b1b" if potassium > 5.0 else "#166534"
+                hco3_status = "Acidosis" if bicarbonate < 22.0 else "Normal"
+                hco3_color = "#991b1b" if bicarbonate < 22.0 else "#166534"
+                alb_status = "Depleted" if albumin < 3.5 else "Normal"
+                alb_color = "#9a3412" if albumin < 3.5 else "#166534"
+
+                st.markdown(f"""
+                <div style="display:flex;gap:6px;margin-top:2px;width:100%;box-sizing:border-box;">
+                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Phosphate</div>
+                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{phosphate:.1f}</div>
+                        <div style="font-size:0.62rem;font-weight:600;color:{po4_color};line-height:1.2;">{po4_status}</div>
                     </div>
-                    """, unsafe_allow_html=True)
-                with f_c2:
-                    k_status = "Hyperkalemic" if potassium > 5.0 else ("Hypokalemic" if potassium < 3.5 else "Normal")
-                    k_color = "#991b1b" if potassium > 5.0 else "#166534"
-                    st.markdown(f"""
-                    <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:0.65rem;color:#64748b;text-transform:uppercase;font-weight:600;">Potassium</div>
-                        <div style="font-size:0.9rem;font-weight:700;color:#0f2744;">{potassium:.1f}</div>
-                        <div style="font-size:0.68rem;font-weight:600;color:{k_color};">{k_status}</div>
+                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Potassium</div>
+                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{potassium:.1f}</div>
+                        <div style="font-size:0.62rem;font-weight:600;color:{k_color};line-height:1.2;">{k_status}</div>
                     </div>
-                    """, unsafe_allow_html=True)
-                with f_c3:
-                    hco3_status = "Acidosis" if bicarbonate < 22.0 else "Normal"
-                    hco3_color = "#991b1b" if bicarbonate < 22.0 else "#166534"
-                    st.markdown(f"""
-                    <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:0.65rem;color:#64748b;text-transform:uppercase;font-weight:600;">Bicarbonate</div>
-                        <div style="font-size:0.9rem;font-weight:700;color:#0f2744;">{bicarbonate:.1f}</div>
-                        <div style="font-size:0.68rem;font-weight:600;color:{hco3_color};">{hco3_status}</div>
+                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Bicarbonate</div>
+                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{bicarbonate:.1f}</div>
+                        <div style="font-size:0.62rem;font-weight:600;color:{hco3_color};line-height:1.2;">{hco3_status}</div>
                     </div>
-                    """, unsafe_allow_html=True)
-                with f_c4:
-                    alb_status = "Depleted" if albumin < 3.5 else "Normal"
-                    alb_color = "#9a3412" if albumin < 3.5 else "#166534"
-                    st.markdown(f"""
-                    <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:0.65rem;color:#64748b;text-transform:uppercase;font-weight:600;">Albumin</div>
-                        <div style="font-size:0.9rem;font-weight:700;color:#0f2744;">{albumin:.1f}</div>
-                        <div style="font-size:0.68rem;font-weight:600;color:{alb_color};">{alb_status}</div>
+                    <div style="flex:1 1 0;min-width:0;background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 2px;text-align:center;">
+                        <div style="font-size:0.60rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.02em;">Albumin</div>
+                        <div style="font-size:0.86rem;font-weight:700;color:#0f2744;line-height:1.2;">{albumin:.1f}</div>
+                        <div style="font-size:0.62rem;font-weight:600;color:{alb_color};line-height:1.2;">{alb_status}</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                </div>
+                """, unsafe_allow_html=True)
 
             with res_tab2:
                 disease_items = []
@@ -974,9 +991,11 @@ with tab_research:
             st.markdown("Comparison between raw Pearson correlation and true Average Treatment Effect (ATE):")
             if not causal_df.empty:
                 cdf_view = causal_df.copy()
+                if 'Treatable' in cdf_view.columns:
+                    cdf_view['Treatable'] = cdf_view['Treatable'].astype(str).str.replace('\u2705', '', regex=False).str.replace('\u274c', '', regex=False).str.strip()
                 def categorize_role(r):
                     if abs(r['Causal_Effect']) > 0.01:
-                        return "Root Cause (Actionable)" if r['Treatable'] == "✅ Yes" else "Root Cause (Demographic)"
+                        return "Root Cause (Actionable)" if "Yes" in str(r.get('Treatable', '')) else "Root Cause (Demographic)"
                     return "Downstream Symptom (Passive)"
                 cdf_view['Classification'] = cdf_view.apply(categorize_role, axis=1)
                 st.dataframe(cdf_view[['Feature','Category','Correlation','Causal_Effect','Classification','Intervention']],
