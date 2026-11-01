@@ -19,187 +19,193 @@ from db_manager import (
 # --- PAGE CONFIG ---
 st.set_page_config(
     page_title="Virtual Kidney Biopsy Portal",
-    page_icon="🩺",
     layout="wide",
     initial_sidebar_state="auto"
 )
 
-# --- PROFESSIONAL MEDICAL CSS (NO-SCROLL SaaS DESIGN) ---
+# --- PROFESSIONAL INSTITUTIONAL NAVY BLUE CSS ---
 st.markdown("""
 <style>
-    /* Import Modern Medical SaaS Typography */
+    /* Professional Typography */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    /* Global App Reset */
+    /* Global Typography & Palette */
     html, body, .stApp {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         background-color: #f8fafc !important;
-        color: #0f172a !important;
+        color: #0a192f !important;
     }
 
-    /* Clean Streamlit Header & Preserve Sidebar Toggle */
+    /* Unobtrusive Clean Header */
     header[data-testid="stHeader"] {
         background: transparent !important;
-        height: 2.8rem !important;
+        height: 2.6rem !important;
         z-index: 99 !important;
     }
-    #MainMenu { visibility: hidden; }
-    footer { visibility: hidden; }
-    div[data-testid="stDecoration"] { display: none; }
-    div[data-testid="stStatusWidget"] { display: none; }
-    .stDeployButton { display: none; }
+    #MainMenu, footer { visibility: hidden; }
+    div[data-testid="stDecoration"], div[data-testid="stStatusWidget"], .stDeployButton { display: none; }
 
-    /* Beautiful, Accessible Sidebar Hide/Open Buttons */
-    [data-testid="stSidebarCollapseButton"],
+    /* Attached Sidebar Toggle Buttons (Clean Corporate Styling) */
+    [data-testid="stSidebarCollapseButton"] {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 6px !important;
+        color: #0f2744 !important;
+        transition: all 0.15s ease-in-out !important;
+    }
+    [data-testid="stSidebarCollapseButton"]:hover {
+        background: #f1f5f9 !important;
+        border-color: #94a3b8 !important;
+        color: #0f2744 !important;
+    }
+
+    /* Dedicated Left-Attached Open Button when Sidebar is Closed */
     [data-testid="collapsedControl"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        background-color: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 8px !important;
-        color: #1d4ed8 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
-        transition: all 0.2s ease-in-out !important;
+        background-color: #0f2744 !important;
+        border: 1px solid #0f2744 !important;
+        border-radius: 0 6px 6px 0 !important;
+        color: #ffffff !important;
+        box-shadow: 2px 2px 6px rgba(15, 39, 68, 0.2) !important;
+        transition: all 0.15s ease-in-out !important;
+        position: fixed !important;
+        top: 14px !important;
+        left: 0 !important;
+        z-index: 999999 !important;
+        padding: 5px 8px !important;
     }
-    [data-testid="stSidebarCollapseButton"]:hover,
     [data-testid="collapsedControl"]:hover {
-        background-color: #eff6ff !important;
-        border-color: #93c5fd !important;
-        color: #1e40af !important;
-        transform: scale(1.05);
+        background-color: #1e3a5f !important;
+        border-color: #1e3a5f !important;
+        color: #ffffff !important;
+        padding-left: 10px !important;
     }
 
-    /* Tighten Layout Padding to Avoid Scrolling */
+    /* Layout: Stretches Full Width Automatically When Sidebar Collapses */
     .block-container {
         padding-top: 0.6rem !important;
-        padding-bottom: 0.8rem !important;
-        padding-left: 1.4rem !important;
-        padding-right: 1.4rem !important;
+        padding-bottom: 1rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* Minimal Professional Sidebar */
+    /* Minimal Institutional Navy Sidebar */
     section[data-testid="stSidebar"] {
-        width: 310px !important;
-        min-width: 280px !important;
-        max-width: 340px !important;
+        width: 300px !important;
+        min-width: 270px !important;
+        max-width: 320px !important;
         background-color: #ffffff !important;
         border-right: 1px solid #e2e8f0 !important;
-        box-shadow: 1px 0 6px rgba(0,0,0,0.02) !important;
+        box-shadow: 1px 0 4px rgba(0,0,0,0.02) !important;
     }
     section[data-testid="stSidebar"] .block-container {
-        padding-top: 1rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-top: 0.8rem !important;
+        padding-left: 0.9rem !important;
+        padding-right: 0.9rem !important;
     }
 
-    /* Top Brand Bar */
+    /* Top Application Header */
     .top-app-header {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 12px;
+        border-radius: 8px;
         padding: 10px 18px;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.75rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
     .brand-group {
         display: flex;
         align-items: center;
         gap: 12px;
     }
-    .brand-icon {
-        width: 38px;
-        height: 38px;
-        background: linear-gradient(135deg, #1d4ed8, #2563eb);
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .brand-tag {
+        background: #0f2744;
         color: #ffffff;
-        font-size: 1.2rem;
         font-weight: 800;
-        box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+        font-size: 0.82rem;
+        padding: 6px 10px;
+        border-radius: 6px;
+        letter-spacing: 0.05em;
     }
     .brand-text-title {
-        font-size: 1.12rem;
+        font-size: 1.1rem;
         font-weight: 700;
-        color: #0f172a;
+        color: #0f2744;
         line-height: 1.2;
     }
     .brand-text-sub {
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         font-weight: 500;
         color: #64748b;
         letter-spacing: 0.02em;
     }
-    .status-badge {
+    .system-status-indicator {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        color: #15803d;
-        padding: 4px 11px;
-        border-radius: 20px;
-        font-size: 0.74rem;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        color: #0f2744;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
         font-weight: 600;
         letter-spacing: 0.02em;
     }
-    .pulse-dot {
+    .status-dot {
         width: 7px;
         height: 7px;
-        background: #22c55e;
+        background: #166534;
         border-radius: 50%;
-        animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
-    /* Cards */
+    /* Institutional Cards */
     .pro-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 14px 18px;
+        border-radius: 8px;
+        padding: 14px 16px;
         margin-bottom: 10px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
     .card-title-sm {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #64748b;
+        color: #475569;
         margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 6px;
     }
 
-    /* Patient Summary Strip */
+    /* Patient Identity Strip */
     .patient-strip {
-        background: #f1f5f9;
+        background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-radius: 9px;
-        padding: 7px 14px;
+        border-radius: 6px;
+        padding: 6px 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 10px;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
     }
     .patient-strip-item {
         color: #64748b;
     }
     .patient-strip-item strong {
-        color: #0f172a;
+        color: #0f2744;
         margin-left: 4px;
     }
 
@@ -207,87 +213,116 @@ st.markdown("""
     .damage-pill {
         display: inline-flex;
         align-items: center;
-        padding: 4px 12px;
-        border-radius: 14px;
+        padding: 3px 10px;
+        border-radius: 4px;
         font-weight: 700;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         letter-spacing: 0.04em;
     }
-    .pill-0 { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
-    .pill-1 { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
-    .pill-2 { background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
-    .pill-3 { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .pill-0 { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .pill-1 { background: #fefce8; color: #854d0e; border: 1px solid #fef08a; }
+    .pill-2 { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
+    .pill-3 { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
-    /* Action Treatment Cards */
+    /* Recommendations Cards */
     .action-box {
-        border-radius: 9px;
-        padding: 11px 14px;
+        border-radius: 6px;
+        padding: 10px 12px;
         margin-bottom: 8px;
-        font-size: 0.81rem;
+        font-size: 0.8rem;
     }
     .action-disease {
-        background: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        border-left: 4px solid #16a34a;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-left: 4px solid #0f2744;
     }
-    .action-disease .action-header { color: #15803d; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
+    .action-disease .action-header { color: #0f2744; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
     
     .action-support {
-        background: #fffbeb;
-        border: 1px solid #fde68a;
-        border-left: 4px solid #d97706;
+        background: #fefce8;
+        border: 1px solid #fef08a;
+        border-left: 4px solid #854d0e;
     }
-    .action-support .action-header { color: #b45309; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
+    .action-support .action-header { color: #854d0e; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
     
     .action-warning {
         background: #fef2f2;
         border: 1px solid #fecaca;
-        border-left: 4px solid #dc2626;
+        border-left: 4px solid #991b1b;
     }
-    .action-warning .action-header { color: #b91c1c; font-weight: 700; margin-bottom: 3px; font-size: 0.83rem; }
+    .action-warning .action-header { color: #991b1b; font-weight: 700; margin-bottom: 3px; font-size: 0.82rem; }
 
     /* Counterfactual Simulator Card */
     .sim-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-radius: 9px;
-        padding: 12px 16px;
+        border-radius: 6px;
+        padding: 12px 14px;
     }
 
-    /* Tab Custom Styling */
+    /* Native Tabs Styling (Institutional Navy) */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
+        gap: 4px;
         background-color: #f1f5f9;
-        padding: 4px;
-        border-radius: 9px;
+        padding: 3px;
+        border-radius: 6px;
         margin-bottom: 10px;
+        border: 1px solid #e2e8f0;
     }
     .stTabs [data-baseweb="tab"] {
-        border-radius: 7px !important;
-        font-size: 0.84rem !important;
+        border-radius: 4px !important;
+        font-size: 0.82rem !important;
         font-weight: 600 !important;
-        padding: 7px 14px !important;
+        padding: 6px 14px !important;
         color: #475569 !important;
         background-color: transparent !important;
         border: none !important;
     }
     .stTabs [aria-selected="true"] {
         background-color: #ffffff !important;
-        color: #1d4ed8 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.07) !important;
+        color: #0f2744 !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
     }
 
     /* Metric adjustments */
     div[data-testid="stMetricValue"] {
-        font-size: 1.35rem !important;
+        font-size: 1.3rem !important;
         font-weight: 700 !important;
-        color: #0f172a !important;
+        color: #0f2744 !important;
     }
     div[data-testid="stMetricLabel"] {
-        font-size: 0.7rem !important;
+        font-size: 0.68rem !important;
         font-weight: 600 !important;
         color: #64748b !important;
         text-transform: uppercase !important;
+    }
+
+    /* Primary Navy Button Override */
+    div.stButton > button[kind="primary"] {
+        background-color: #0f2744 !important;
+        color: #ffffff !important;
+        border: 1px solid #0f2744 !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+        font-size: 0.84rem !important;
+        transition: background-color 0.15s ease !important;
+    }
+    div.stButton > button[kind="primary"]:hover {
+        background-color: #1e3a5f !important;
+        border-color: #1e3a5f !important;
+        color: #ffffff !important;
+    }
+
+    /* Secondary Buttons */
+    div.stButton > button {
+        border-radius: 6px !important;
+        font-size: 0.8rem !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #1e293b !important;
+    }
+    div.stButton > button:hover {
+        border-color: #94a3b8 !important;
+        background-color: #f8fafc !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -322,7 +357,7 @@ FEATURE_ORDER = [
 
 # --- PRESETS (ALL 20 FEATURES CONFIGURED) ---
 PRESETS = {
-    "➕ New Patient (Custom Entry)": {
+    "New Patient (Custom Entry)": {
         'id': 'PAT-NEW', 'name': '', 'age': 55, 'gender': 'Male',
         'htn': False, 'glucose_min': 95.0, 'avg_los': 3.0,
         'phosphate_mean': 3.5, 'phosphate_min': 3.0, 'phosphate_max': 4.0, 'phosphate_std': 0.3,
@@ -371,38 +406,32 @@ PRESETS = {
 
 # --- SVG GAUGE GENERATOR ---
 def make_gauge_svg(percent, color):
-    r = 54
-    cx, cy = 68, 68
+    r = 52
+    cx, cy = 66, 66
     circumference = 2 * math.pi * r
     offset = circumference * (1 - percent / 100)
     return f"""
     <div style="display:flex;justify-content:center;margin:2px 0;">
-    <svg width="136" height="136" viewBox="0 0 136 136">
+    <svg width="132" height="132" viewBox="0 0 132 132">
         <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#e2e8f0" stroke-width="10"/>
         <circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="10"
             stroke-dasharray="{circumference}" stroke-dashoffset="{offset}"
             stroke-linecap="round" transform="rotate(-90 {cx} {cy})"
             style="transition: stroke-dashoffset 0.8s ease;"/>
-        <text x="{cx}" y="{cy-3}" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">{percent:.1f}%</text>
+        <text x="{cx}" y="{cy-3}" text-anchor="middle" font-size="22" font-weight="700" fill="#0f2744">{percent:.1f}%</text>
         <text x="{cx}" y="{cy+13}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="600" letter-spacing="0.08em">RISK SCORE</text>
     </svg>
     </div>
     """
 
 # ====================================================
-# MINIMAL PROFESSIONAL SIDEBAR: PATIENT MASTER
+# MINIMAL INSTITUTIONAL SIDEBAR
 # ====================================================
 with st.sidebar:
     st.markdown("""
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">
-        <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:28px;height:28px;background:#2563eb;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8rem;">VB</div>
-            <div>
-                <div style="font-weight:700;font-size:0.88rem;color:#0f172a;line-height:1.1;">Patient Master</div>
-                <div style="font-size:0.7rem;color:#64748b;">Clinical Profile</div>
-            </div>
-        </div>
-        <span style="font-size:0.68rem;background:#f0fdf4;color:#166534;padding:2px 8px;border-radius:12px;font-weight:600;border:1px solid #bbf7d0;">Active</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #f1f5f9;">
+        <div style="font-weight:700;font-size:0.86rem;color:#0f2744;letter-spacing:0.02em;">Patient Cohort Selection</div>
+        <span style="font-size:0.65rem;background:#f8fafc;color:#0f2744;padding:2px 6px;border-radius:4px;font-weight:600;border:1px solid #e2e8f0;">Active</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -415,28 +444,30 @@ with st.sidebar:
         st.session_state['selected_preset'] = st.session_state['preset_selectbox']
 
     preset_choice = st.selectbox(
-        "Load Clinical Profile",
+        "Clinical Profile",
         preset_keys,
         index=default_idx,
         key="preset_selectbox",
+        label_visibility="collapsed",
         on_change=_sync_preset
     )
     p = PRESETS[preset_choice]
 
     c_btn1, c_btn2 = st.columns(2)
     with c_btn1:
-        if st.button("➕ New Patient", use_container_width=True):
-            st.session_state['selected_preset'] = "➕ New Patient (Custom Entry)"
+        if st.button("New Patient", use_container_width=True):
+            st.session_state['selected_preset'] = "New Patient (Custom Entry)"
             st.rerun()
     with c_btn2:
-        if st.button("👥 Load Cohort", use_container_width=True):
+        if st.button("Load Cohort", use_container_width=True):
             seed_sample_patients()
-            st.toast("Sample cohort loaded into registry!", icon="👥")
+            st.toast("Sample cohort loaded into registry.")
 
-    st.markdown("<hr style='margin:10px 0;border-color:#f1f5f9;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin:8px 0;border-color:#f1f5f9;'>", unsafe_allow_html=True)
+    st.markdown('<div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;color:#64748b;margin-bottom:6px;">Demographics</div>', unsafe_allow_html=True)
 
     sb_id = st.text_input("Patient ID / MRN", value=p['id'] if p and p['id'] != 'PAT-NEW' else "PAT-0042")
-    sb_name = st.text_input("Patient Full Name", value=p['name'] if p else "", placeholder="e.g. Eleanor Vance")
+    sb_name = st.text_input("Full Name", value=p['name'] if p else "", placeholder="e.g. Eleanor Vance")
     
     col_a1, col_a2 = st.columns(2)
     with col_a1:
@@ -444,24 +475,21 @@ with st.sidebar:
     with col_a2:
         sb_gender = st.selectbox("Biological Sex", ["Male", "Female"], index=0 if (p and p['gender'] == 'Male') else 1)
 
-    with st.expander("📝 Stay & Clinical Notes", expanded=False):
-        sb_los = st.number_input("Inpatient Stay (Days)", min_value=1.0, max_value=60.0, value=float(p['avg_los']) if p else 4.0, step=1.0)
+    with st.expander("Hospital Stay & Clinical Notes", expanded=False):
+        sb_los = st.number_input("Stay Duration (Days)", min_value=1.0, max_value=60.0, value=float(p['avg_los']) if p else 4.0, step=1.0)
         sb_notes = st.text_area("Encounter Notes", value=p['notes'] if p else "", height=60)
 
-    # In case expander is collapsed and variables need default assignment
     if 'sb_los' not in locals():
         sb_los = float(p['avg_los']) if p else 4.0
     if 'sb_notes' not in locals():
         sb_notes = p['notes'] if p else ""
 
-    # Minimal System Status Footer
     st.markdown("""
-    <div style="margin-top:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;font-size:0.7rem;color:#64748b;line-height:1.5;">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
-            <span style="width:6px;height:6px;background:#22c55e;border-radius:50%;"></span>
-            <strong style="color:#0f172a;">AI Core Connected</strong>
-        </div>
-        <div>XGBoost &bull; Pearl SCM &bull; SQLite DB</div>
+    <div style="margin-top:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.68rem;color:#475569;line-height:1.5;">
+        <div style="font-weight:700;color:#0f2744;margin-bottom:2px;">System Infrastructure</div>
+        <div>Model: XGBoost (F1: 0.7732)</div>
+        <div>Inference: Pearl SCM / DoWhy</div>
+        <div>Storage: SQLite Encrypted</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -471,15 +499,15 @@ with st.sidebar:
 st.markdown("""
 <div class="top-app-header">
     <div class="brand-group">
-        <div class="brand-icon">🩺</div>
+        <div class="brand-tag">VKB</div>
         <div>
             <div class="brand-text-title">Virtual Kidney Biopsy Portal</div>
-            <div class="brand-text-sub">Clinical Decision Support System &bull; Non-Invasive Histopathology & Causal Risk Estimation</div>
+            <div class="brand-text-sub">Clinical Decision Support System &bull; Histopathology & Causal Risk Estimation</div>
         </div>
     </div>
-    <div class="status-badge">
-        <span class="pulse-dot"></span>
-        AI System Active &bull; KDIGO 2021
+    <div class="system-status-indicator">
+        <span class="status-dot"></span>
+        Operational &bull; KDIGO Guidelines
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -488,13 +516,13 @@ st.markdown("""
 # TOP WORKSPACE TABS
 # ====================================================
 tab_biopsy, tab_registry, tab_research = st.tabs([
-    "🩺 Virtual Biopsy Station",
-    "📋 Patient Registry & Database",
-    "🔬 Causal & Scientific Evidence"
+    "Virtual Biopsy Assessment",
+    "Patient Registry",
+    "Scientific Evidence"
 ])
 
 # ====================================================
-# TAB 1: VIRTUAL BIOPSY STATION (NO-SCROLL TABBED WORKSPACE)
+# TAB 1: VIRTUAL BIOPSY ASSESSMENT
 # ====================================================
 with tab_biopsy:
     col_input, col_results = st.columns([1.05, 1.35], gap="medium")
@@ -502,16 +530,16 @@ with tab_biopsy:
     # ------------------ LEFT COLUMN: INPUT WORKSPACE ------------------
     with col_input:
         st.markdown('<div class="pro-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-title-sm"><span>Clinical Lab Slip & Etiology Station</span><span>MIMIC-IV Normalized</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-sm"><span>Clinical Biomarker Intake</span><span>MIMIC-IV Normalized</span></div>', unsafe_allow_html=True)
 
         input_subtab1, input_subtab2, input_subtab3 = st.tabs([
-            "🩸 Routine Labs",
-            "🧬 Causal Etiology",
-            "⚙️ 20-Feature Inspector"
+            "Laboratory Biomarkers",
+            "Etiologic Risk Factors",
+            "Feature Parameters & Overrides"
         ])
 
         with input_subtab1:
-            st.caption("Enter standard outpatient / inpatient basic metabolic panel values:")
+            st.caption("Standard basic metabolic and electrolyte panel:")
             l_col1, l_col2 = st.columns(2)
             with l_col1:
                 phosphate = st.number_input("Phosphate (mg/dL)", min_value=1.0, max_value=15.0, value=float(p['phosphate_mean']) if p else 3.5, step=0.1)
@@ -523,7 +551,7 @@ with tab_biopsy:
                 sodium = st.number_input("Sodium (mEq/L)", min_value=110.0, max_value=160.0, value=140.0, step=1.0)
 
         with input_subtab2:
-            st.caption("Etiologic root causes mathematically identified by Pearl's SCM:")
+            st.caption("Causal root causes verified through Structural Causal Modeling:")
             e_col1, e_col2 = st.columns(2)
             with e_col1:
                 has_htn = st.toggle("Documented Hypertension", value=p['htn'] if p else False, help="Root Cause: ATE = -0.0828 (p < 0.001)")
@@ -533,8 +561,8 @@ with tab_biopsy:
                                                   help="Root Cause: ATE = -0.0483 (p < 0.001)")
 
             st.markdown("""
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:0.75rem;color:#475569;">
-                <strong>Clinical Note:</strong> Systemic hypertension and glycemic dysregulation transmit shear stress and advanced glycation products into glomerular capillaries, driving permanent tissue fibrosis.
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:0.73rem;color:#475569;">
+                <strong>Physiological Rationale:</strong> Systemic arterial hypertension and glycemic dysregulation exert mechanical shear and biochemical injury on glomerular basement membranes, initiating permanent glomerulosclerosis.
             </div>
             """, unsafe_allow_html=True)
 
@@ -556,16 +584,16 @@ with tab_biopsy:
 
         with input_subtab3:
             st.markdown(f"""
-            <div style="font-size:0.78rem;color:#334155;line-height:1.7;">
-                <div><strong>Phosphate:</strong> Min: <code>{auto_ph_min:.2f}</code> | Max: <code>{auto_ph_max:.2f}</code> | Std: <code>{auto_ph_std:.2f}</code></div>
-                <div><strong>Potassium:</strong> Max: <code>{auto_k_max:.2f}</code> | Std: <code>{auto_k_std:.2f}</code> | Hyperkalemia: <code>{'Yes' if auto_hyperk else 'No'}</code></div>
-                <div><strong>Acid-Base:</strong> HCO3 Min: <code>{auto_bc_min:.1f}</code> | Std: <code>{auto_bc_std:.2f}</code> | Ca Min: <code>{calcium:.1f}</code></div>
-                <div><strong>Albumin:</strong> Min: <code>{auto_alb_min:.2f}</code> | Low Albumin Flag: <code>{'Yes' if auto_low_alb else 'No'}</code></div>
-                <div><strong>Sodium:</strong> Variation Std: <code>{auto_na_std:.2f}</code></div>
+            <div style="font-size:0.75rem;color:#334155;line-height:1.65;">
+                <div>Phosphate: Min <code>{auto_ph_min:.2f}</code> | Max <code>{auto_ph_max:.2f}</code> | Std <code>{auto_ph_std:.2f}</code></div>
+                <div>Potassium: Max <code>{auto_k_max:.2f}</code> | Std <code>{auto_k_std:.2f}</code> | Hyperkalemia: <code>{'Yes' if auto_hyperk else 'No'}</code></div>
+                <div>Acid-Base: HCO3 Min <code>{auto_bc_min:.1f}</code> | Std <code>{auto_bc_std:.2f}</code> | Ca Min <code>{calcium:.1f}</code></div>
+                <div>Albumin: Min <code>{auto_alb_min:.2f}</code> | Low Albumin: <code>{'Yes' if auto_low_alb else 'No'}</code></div>
+                <div>Sodium: Spread Std <code>{auto_na_std:.2f}</code></div>
             </div>
             """, unsafe_allow_html=True)
 
-            with st.expander("⚙️ Manual Feature Overrides (Optional)", expanded=False):
+            with st.expander("Manual Feature Overrides (Optional)", expanded=False):
                 ov_c1, ov_c2 = st.columns(2)
                 with ov_c1:
                     ov_ph_min = st.number_input("Override PO4 Min", value=auto_ph_min, step=0.1)
@@ -578,7 +606,6 @@ with tab_biopsy:
                     ov_bc_std = st.number_input("Override HCO3 Std", value=auto_bc_std, step=0.1)
                     ov_alb_min = st.number_input("Override Alb Min", value=auto_alb_min, step=0.1)
         
-        # Use derivations or overrides
         eff_ph_min = ov_ph_min if 'ov_ph_min' in locals() else auto_ph_min
         eff_ph_max = ov_ph_max if 'ov_ph_max' in locals() else auto_ph_max
         eff_ph_std = ov_ph_std if 'ov_ph_std' in locals() else auto_ph_std
@@ -588,13 +615,12 @@ with tab_biopsy:
         eff_bc_std = ov_bc_std if 'ov_bc_std' in locals() else auto_bc_std
         eff_alb_min = ov_alb_min if 'ov_alb_min' in locals() else auto_alb_min
 
-        st.markdown("<hr style='margin:10px 0 8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
-        run_btn = st.button("💾 Run Virtual Biopsy & Persist Record", type="primary", use_container_width=True)
+        st.markdown("<hr style='margin:8px 0 6px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+        run_btn = st.button("Run Virtual Biopsy & Save Record", type="primary", use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     # ------------------ RIGHT COLUMN: DIAGNOSTIC & SIMULATION WORKSPACE ------------------
     with col_results:
-        # Build exact 20-feature input dictionary from inputs
         raw = {
             'gender_encoded': 1.0 if sb_gender == "Male" else 0.0,
             'has_hypertension': 1.0 if has_htn else 0.0,
@@ -627,25 +653,24 @@ with tab_biopsy:
         input_df = pd.DataFrame([scaled])[FEATURE_ORDER]
         risk = float(model.predict_proba(input_df)[0][1])
 
-        # Damage Level Classification
+        # Damage Level Classification (Standard Restrained Clinical Colors)
         if risk <= 0.25:
-            dlvl, dtitle, dbadge, dcolor = 0, "Preserved Architecture", "pill-0", "#16a34a"
+            dlvl, dtitle, dbadge, dcolor = 0, "Preserved Architecture", "pill-0", "#166534"
             ifta = "< 10% IFTA"
             micro = "Intact glomerular capillary loops with uniform basement membranes. Minimal mesangial expansion. Proximal tubules show preserved brush borders without interstitial fibrosis."
         elif risk <= 0.50:
-            dlvl, dtitle, dbadge, dcolor = 1, "Mild Chronic Injury", "pill-1", "#ca8a04"
+            dlvl, dtitle, dbadge, dcolor = 1, "Mild Chronic Injury", "pill-1", "#854d0e"
             ifta = "10 – 25% IFTA"
             micro = "Focal glomerular basement membrane thickening with early mesangial expansion. Scattered tubular vacuolization with early focal interstitial mononuclear infiltrates."
         elif risk <= 0.75:
-            dlvl, dtitle, dbadge, dcolor = 2, "Severe Tissue Damage", "pill-2", "#ea580c"
+            dlvl, dtitle, dbadge, dcolor = 2, "Severe Tissue Damage", "pill-2", "#9a3412"
             ifta = "26 – 50% IFTA"
             micro = "Segmental glomerulosclerosis involving >25% of glomeruli. Widespread tubular atrophy with thyroidization. Moderate interstitial fibrosis and arteriolar hyalinosis."
         else:
-            dlvl, dtitle, dbadge, dcolor = 3, "Critical Failure", "pill-3", "#dc2626"
+            dlvl, dtitle, dbadge, dcolor = 3, "Critical Failure", "pill-3", "#991b1b"
             ifta = "> 50% IFTA"
             micro = "Global glomerulosclerosis in >50% of glomeruli. Severe diffuse tubular drop-out with extensive interstitial fibrosis and fibrointimal vascular obliteration."
 
-        # Quick Patient Strip
         p_display_name = sb_name.strip() if sb_name.strip() else "Anonymous Patient"
         p_display_id = sb_id.strip() if sb_id.strip() else "PAT-0042"
         st.markdown(f"""
@@ -653,38 +678,36 @@ with tab_biopsy:
             <span class="patient-strip-item">MRN:<strong>{p_display_id}</strong></span>
             <span class="patient-strip-item">Patient:<strong>{p_display_name}</strong></span>
             <span class="patient-strip-item">Demographics:<strong>{sb_age}y &bull; {sb_gender}</strong></span>
-            <span class="patient-strip-item">Date:<strong>{datetime.now().strftime('%b %d, %Y')}</strong></span>
+            <span class="patient-strip-item">Encounter:<strong>{datetime.now().strftime('%b %d, %Y')}</strong></span>
         </div>
         """, unsafe_allow_html=True)
 
-        # Right Tabbed Result Hub
         st.markdown('<div class="pro-card">', unsafe_allow_html=True)
         res_tab1, res_tab2, res_tab3 = st.tabs([
-            "🎯 Histopathology & Risk",
-            "💊 Treatment Advisory",
-            "⚡ Counterfactual Simulator"
+            "Histopathological Risk",
+            "Clinical Guidance",
+            "Counterfactual Simulator"
         ])
 
         with res_tab1:
             r_top1, r_top2 = st.columns([1.5, 1.2])
             with r_top1:
-                st.markdown(f'<div style="margin-top:4px;"><span class="damage-pill {dbadge}">DAMAGE LEVEL {dlvl}</span></div>', unsafe_allow_html=True)
-                st.markdown(f"<div style='font-size:1.22rem;font-weight:700;color:#0f172a;margin:5px 0 2px 0;'>{dtitle}</div>", unsafe_allow_html=True)
-                st.markdown(f"<div style='color:#64748b;font-size:0.83rem;'>Estimated Interstitial Fibrosis: <strong style=\"color:{dcolor}\">{ifta}</strong></div>", unsafe_allow_html=True)
+                st.markdown(f'<div style="margin-top:3px;"><span class="damage-pill {dbadge}">DAMAGE LEVEL {dlvl}</span></div>', unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size:1.15rem;font-weight:700;color:#0f2744;margin:4px 0 2px 0;'>{dtitle}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='color:#64748b;font-size:0.8rem;'>Estimated Interstitial Fibrosis: <strong style=\"color:{dcolor}\">{ifta}</strong></div>", unsafe_allow_html=True)
             with r_top2:
                 st.markdown(make_gauge_svg(risk * 100, dcolor), unsafe_allow_html=True)
 
             st.markdown(f"""
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;margin-top:4px;">
-                <div style="font-weight:700;color:#334155;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;">
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 12px;margin-top:4px;">
+                <div style="font-weight:700;color:#0f2744;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;">
                     Microscopic Tissue Pathology Summary
                 </div>
-                <div style="color:#475569;font-size:0.82rem;line-height:1.45;">{micro}</div>
+                <div style="color:#334155;font-size:0.8rem;line-height:1.45;">{micro}</div>
             </div>
             """, unsafe_allow_html=True)
 
         with res_tab2:
-            # Disease Modifying Treatments
             disease_items = []
             if has_htn:
                 disease_items.append("Initiate RAAS blockade (ACE inhibitor or ARB) — target BP < 130/80 mmHg")
@@ -694,7 +717,6 @@ with tab_biopsy:
                 disease_items.append("No active modifiable root causes identified. Maintain routine longitudinal surveillance.")
             primary_plan = "; ".join(disease_items)
 
-            # Supportive Items
             supp_items = []
             if phosphate > 4.5:
                 supp_items.append(f"Phosphate elevated ({phosphate:.1f} mg/dL) — prescribe dietary phosphate binders")
@@ -710,21 +732,21 @@ with tab_biopsy:
 
             st.markdown(f"""
             <div class="action-box action-disease">
-                <div class="action-header">✅ Disease-Modifying Targets (Root Causes)</div>
+                <div class="action-header">Disease-Modifying Targets (Etiologic Root Causes)</div>
                 <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.45;">{d_html}</ul>
             </div>
             <div class="action-box action-support">
-                <div class="action-header">⚠️ Supportive Care Only (Symptom Clearance)</div>
+                <div class="action-header">Supportive Care Only (Non-Causal Symptoms)</div>
                 <ul style="margin:2px 0 0 0;padding-left:18px;line-height:1.45;">{s_html}</ul>
             </div>
             <div class="action-box action-warning">
-                <div class="action-header">🛑 Prescribing Safety Warning</div>
-                Elevated phosphate and potassium are passive consequences of decreased nephron clearance. Lowering them resolves acute lab numbers but does NOT slow renal scarring. Interventional priority must remain on BP and glucose.
+                <div class="action-header">Clinical Prescribing Advisory</div>
+                Elevated phosphate and potassium are passive consequences of decreased nephron clearance. Lowering them resolves acute lab numbers but does not slow renal scarring. Interventional priority must remain on BP and glucose.
             </div>
             """, unsafe_allow_html=True)
 
         with res_tab3:
-            st.caption("Simulate counterfactual therapeutic outcomes ($Y_{X \\leftarrow x'}$) in real time:")
+            st.caption("Simulate counterfactual therapeutic outcomes ($Y_{X \\leftarrow x'}$):")
             sim_c1, sim_c2 = st.columns(2)
             with sim_c1:
                 sim_bp = st.checkbox("Achieve Target BP (< 130/80)", value=has_htn)
@@ -739,29 +761,29 @@ with tab_biopsy:
 
             projected = max(0.02, risk - reduction)
             if projected <= 0.25:
-                p_label, p_color = "Level 0 (Preserved)", "#16a34a"
+                p_label, p_color = "Level 0 (Preserved)", "#166534"
             elif projected <= 0.50:
-                p_label, p_color = "Level 1 (Mild)", "#ca8a04"
+                p_label, p_color = "Level 1 (Mild)", "#854d0e"
             elif projected <= 0.75:
-                p_label, p_color = "Level 2 (Severe)", "#ea580c"
+                p_label, p_color = "Level 2 (Severe)", "#9a3412"
             else:
-                p_label, p_color = "Level 3 (Critical)", "#dc2626"
+                p_label, p_color = "Level 3 (Critical)", "#991b1b"
 
             st.markdown(f"""
             <div class="sim-box">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                    <span style="font-size:0.78rem;color:#475569;">Absolute Risk Reduction:</span>
-                    <span style="font-size:1.05rem;font-weight:700;color:#16a34a;">-{reduction*100:.1f}%</span>
+                    <span style="font-size:0.75rem;color:#475569;">Absolute Risk Reduction:</span>
+                    <span style="font-size:1.05rem;font-weight:700;color:#166534;">-{reduction*100:.1f}%</span>
                 </div>
-                <div style="font-size:0.73rem;color:#64748b;margin-bottom:3px;">Baseline: {risk*100:.1f}%</div>
-                <div style="background:#e2e8f0;border-radius:5px;height:12px;overflow:hidden;margin-bottom:6px;">
+                <div style="font-size:0.7rem;color:#64748b;margin-bottom:2px;">Baseline Risk: {risk*100:.1f}%</div>
+                <div style="background:#e2e8f0;border-radius:4px;height:10px;overflow:hidden;margin-bottom:6px;">
                     <div style="width:{risk*100:.0f}%;height:100%;background:{dcolor};"></div>
                 </div>
-                <div style="font-size:0.73rem;color:#64748b;margin-bottom:3px;">Projected Post-Intervention: {projected*100:.1f}%</div>
-                <div style="background:#e2e8f0;border-radius:5px;height:12px;overflow:hidden;margin-bottom:8px;">
+                <div style="font-size:0.7rem;color:#64748b;margin-bottom:2px;">Projected Post-Intervention: {projected*100:.1f}%</div>
+                <div style="background:#e2e8f0;border-radius:4px;height:10px;overflow:hidden;margin-bottom:8px;">
                     <div style="width:{projected*100:.0f}%;height:100%;background:{p_color};"></div>
                 </div>
-                <div style="font-size:0.8rem;color:#1e40af;font-weight:600;">
+                <div style="font-size:0.78rem;color:#0f2744;font-weight:600;">
                     Projected Histological Outcome: <span style="color:{p_color};">{p_label}</span>
                 </div>
             </div>
@@ -769,7 +791,6 @@ with tab_biopsy:
 
         st.markdown('</div>', unsafe_allow_html=True)
 
-        # Database Save Execution
         if run_btn:
             record = {
                 'patient_id': p_display_id,
@@ -791,10 +812,10 @@ with tab_biopsy:
                 'notes': sb_notes
             }
             rid = save_patient_record(record)
-            st.success(f"✅ Biopsy record #{rid} for {p_display_name} ({p_display_id}) safely committed to SQLite database!")
+            st.success(f"Biopsy record #{rid} for {p_display_name} ({p_display_id}) successfully recorded in the registry.")
 
 # ====================================================
-# TAB 2: PATIENT REGISTRY & DATABASE
+# TAB 2: PATIENT REGISTRY
 # ====================================================
 with tab_registry:
     st.markdown('<div class="pro-card">', unsafe_allow_html=True)
@@ -802,9 +823,8 @@ with tab_registry:
 
     df_records = get_all_records()
     if len(df_records) == 0:
-        st.info("No records in the database. Use '👥 Load Cohort' in the sidebar or run a biopsy.")
+        st.info("No records in the database. Use 'Load Cohort' in the sidebar or run a biopsy.")
     else:
-        # Metrics ribbon
         m1, m2, m3, m4, m5 = st.columns(5)
         with m1: m1.metric("Total Biopsies", len(df_records))
         with m2: m2.metric("Level 0 (Normal)", len(df_records[df_records['damage_level']==0]))
@@ -812,7 +832,7 @@ with tab_registry:
         with m4: m4.metric("Level 2 (Severe)", len(df_records[df_records['damage_level']==2]))
         with m5: m5.metric("Level 3 (Failure)", len(df_records[df_records['damage_level']==3]))
 
-        st.markdown("<hr style='margin:10px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+        st.markdown("<hr style='margin:8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
         f_col1, f_col2, f_col3 = st.columns([1.5, 2.5, 1])
         with f_col1:
             lvl_filter = st.selectbox("Filter Damage Grade", ["All", "Level 0", "Level 1", "Level 2", "Level 3"])
@@ -820,7 +840,7 @@ with tab_registry:
             search_query = st.text_input("Search MRN or Patient Name", placeholder="Type name or ID...")
         with f_col3:
             st.markdown("<div style='height:28px;'></div>", unsafe_allow_html=True)
-            if st.button("🔄 Refresh Data", use_container_width=True):
+            if st.button("Refresh Data", use_container_width=True):
                 st.rerun()
 
         filt = df_records.copy()
@@ -847,22 +867,22 @@ with tab_registry:
         down_c, del_c = st.columns([2, 5])
         with down_c:
             csv_bytes = filt.to_csv(index=False).encode('utf-8')
-            st.download_button("📥 Export Registry CSV", csv_bytes,
+            st.download_button("Export Registry CSV", csv_bytes,
                                f"patient_biopsy_registry_{datetime.now().strftime('%Y%m%d')}.csv",
                                "text/csv", use_container_width=True)
         with del_c:
-            with st.expander("🗑️ Delete or Manage Individual Records", expanded=False):
+            with st.expander("Manage Individual Records", expanded=False):
                 d1, d2, d3 = st.columns([3, 1.5, 1.5])
                 with d1:
                     opts = {f"Record #{r['id']} - {r['patient_name']} ({r['patient_id']})": r['id'] for _, r in df_records.iterrows()}
                     selected_rec = st.selectbox("Select Record", list(opts.keys()), label_visibility="collapsed")
                 with d2:
-                    if st.button("🗑️ Delete Selected", use_container_width=True):
+                    if st.button("Delete Record", use_container_width=True):
                         delete_record(opts[selected_rec])
                         st.success(f"Deleted record #{opts[selected_rec]}")
                         st.rerun()
                 with d3:
-                    if st.button("⚠️ Clear Entire DB", use_container_width=True):
+                    if st.button("Clear All Records", use_container_width=True):
                         clear_all_records()
                         st.warning("All records wiped.")
                         st.rerun()
@@ -870,16 +890,16 @@ with tab_registry:
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ====================================================
-# TAB 3: CAUSAL & SCIENTIFIC EVIDENCE (TABBED DOSSIER)
+# TAB 3: SCIENTIFIC EVIDENCE
 # ====================================================
 with tab_research:
     st.markdown('<div class="pro-card">', unsafe_allow_html=True)
     st.markdown('<div class="card-title-sm"><span>Scientific Validation & Causal Inference Dossier</span><span>MSc Research Evidence</span></div>', unsafe_allow_html=True)
 
     ev_tab1, ev_tab2, ev_tab3 = st.tabs([
-        "🕸️ Structural Causal Model (DAG)",
-        "📊 ATE vs Observational Correlation",
-        "⚖️ RQ3: Associational vs Causal AI"
+        "Structural Causal Model (DAG)",
+        "Causal Effects vs Observational Correlation",
+        "RQ3: Associational vs Causal AI"
     ])
 
     with ev_tab1:
