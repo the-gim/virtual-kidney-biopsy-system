@@ -1,0 +1,8 @@
+Model,Architecture_Type,Accuracy,Macro_F1,Macro_Precision,Macro_Recall,Optimal_Threshold,Literature_Comparison
+XGBoost,Regularized Gradient-Boosted Trees,77.42%,0.7732,0.7730,0.7736,0.44,Superior (+15.42% over Li et al.)
+SVM,Infinite-dim RBF Kernel (C=1.0),77.31%,0.7729,0.7737,0.7751,0.46,Competitive (+15.31% over Li et al.)
+ANN (MLP),3-Layer Dense Network (AdamW),76.56%,0.7640,0.7644,0.7637,0.44,Competitive (+14.56% over Li et al.)
+1D-CNN,Temporal Convolutional Feature Extractor,76.50%,0.7649,0.7663,0.7675,0.50,Competitive (+14.50% over Li et al.)
+Bidirectional LSTM,Recurrent Sequential Network (h=32),75.12%,0.7497,0.7499,0.7496,0.40,Competitive (+13.12% over Li et al.)
+Decision Tree (CART),Gini Benchmark (Max Depth 5),74.41%,0.7439,0.7450,0.7462,0.50,Baseline (+12.41% over Li et al.)
+Li et al. (Baseline),Published Literature Reference,62.00%,0.6150,0.6100,0.6200,0.50,Prior Benchmark

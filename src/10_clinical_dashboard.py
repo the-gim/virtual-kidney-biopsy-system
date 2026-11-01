@@ -6,6 +6,8 @@ import os
 import sys
 import json
 import math
+import io
+import zipfile
 from datetime import datetime
 
 # Ensure src/ is on the Python path (needed for Streamlit Cloud deployment)
@@ -530,6 +532,37 @@ def load_resources():
     return mdl, sp, cdf
 
 model, scaler_params, causal_df = load_resources()
+
+@st.cache_data
+def get_research_zip_bytes():
+    zip_path = os.path.join(BASE_PATH, 'outputs/results/virtual_biopsy_complete_test_results.zip')
+    if os.path.exists(zip_path):
+        with open(zip_path, 'rb') as f:
+            return f.read()
+
+    buf = io.BytesIO()
+    files_to_zip = [
+        ('outputs/results/all_models_benchmark.csv', '01_RQ1_all_models_benchmark.csv'),
+        ('outputs/results/advanced_metrics.csv', '01b_RQ1_advanced_deep_learning_metrics.csv'),
+        ('outputs/results/basic_metrics.csv', '01c_RQ1_basic_classifiers_metrics.csv'),
+        ('outputs/results/mcnemar_complete_summary.csv', '02_McNemar_hypothesis_tests_summary.csv'),
+        ('outputs/results/mcnemar_p_values.csv', '02b_McNemar_pairwise_p_values.csv'),
+        ('outputs/results/mcnemar_test.csv', '02c_McNemar_contingency_counts.csv'),
+        ('outputs/causal_results/causal_effects_20features.csv', '03_RQ2_causal_effects_all_20_features.csv'),
+        ('outputs/causal_results/causal_statistical_refutation_tests.csv', '03b_RQ2_causal_refutation_tests.csv'),
+        ('outputs/causal_results/treatable_causes.csv', '03c_RQ2_treatable_actionable_causes.csv'),
+        ('outputs/results/rq3_causal_vs_noncausal.csv', '04_RQ3_causal_vs_noncausal_benchmark.csv'),
+        ('outputs/causal_results/causal_graph_20features.png', 'figures/causal_dag_20features.png'),
+        ('outputs/causal_results/causal_effects_20features_viz.png', 'figures/causal_effects_forest_plot.png'),
+        ('outputs/figures/rq3_causal_vs_noncausal_comparison.png', 'figures/rq3_confusion_matrix_comparison.png')
+    ]
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
+        for rel_path, arcname in files_to_zip:
+            full_p = os.path.join(BASE_PATH, rel_path)
+            if os.path.exists(full_p):
+                z.write(full_p, arcname)
+    return buf.getvalue()
+
 
 FEATURE_ORDER = [
     'gender_encoded', 'has_hypertension', 'albumin_mean', 'albumin_min',
@@ -1118,10 +1151,11 @@ with tab_research:
     with st.container(border=True):
         st.markdown('<div class="card-title-sm"><span>Scientific Validation & Causal Inference Dossier</span><span>MSc Research Evidence</span></div>', unsafe_allow_html=True)
 
-        ev_tab1, ev_tab2, ev_tab3 = st.tabs([
+        ev_tab1, ev_tab2, ev_tab3, ev_tab4 = st.tabs([
             "Structural Causal Model (DAG)",
             "Causal Effects vs Observational Correlation",
-            "RQ3: Associational vs Causal AI"
+            "RQ3: Associational vs Causal AI",
+            "Download Empirical Test Results"
         ])
 
         with ev_tab1:
@@ -1146,6 +1180,12 @@ with tab_research:
                 st.dataframe(cdf_view[['Feature','Category','Correlation','Causal_Effect','Classification','Intervention']],
                              use_container_width=True, hide_index=True)
                 st.caption("Key Finding: 17 out of 20 predictive features exhibit ATE = 0.0000 (symptoms that do not halt tissue destruction).")
+                st.download_button(
+                    label="Download 20-Feature Causal Effects CSV",
+                    data=cdf_view.to_csv(index=False).encode('utf-8'),
+                    file_name="causal_effects_20features.csv",
+                    mime="text/csv"
+                )
 
         with ev_tab3:
             st.markdown("""
@@ -1154,8 +1194,97 @@ with tab_research:
             """)
             rq3_path = os.path.join(BASE_PATH, 'outputs/results/rq3_causal_vs_noncausal.csv')
             if os.path.exists(rq3_path):
-                st.dataframe(pd.read_csv(rq3_path), use_container_width=True, hide_index=True)
+                df_rq3_tab = pd.read_csv(rq3_path)
+                st.dataframe(df_rq3_tab, use_container_width=True, hide_index=True)
                 st.caption("McNemar's Paired Significance Test: χ² = 339.43, p = 8.47e-76 (statistically significant difference in recall).")
+                st.download_button(
+                    label="Download RQ3 Benchmark Comparison CSV",
+                    data=df_rq3_tab.to_csv(index=False).encode('utf-8'),
+                    file_name="rq3_causal_vs_noncausal.csv",
+                    mime="text/csv"
+                )
             rq3_plot = os.path.join(BASE_PATH, 'outputs/figures/rq3_causal_vs_noncausal_comparison.png')
             if os.path.exists(rq3_plot):
                 st.image(rq3_plot, caption="Confusion Matrix Benchmark: Model A (Observational) vs Model B (Causal)", use_container_width=True)
+
+        with ev_tab4:
+            st.markdown("""
+            <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:10px 14px;margin-bottom:12px;">
+                <div style="font-weight:700;color:#0f2744;font-size:0.9rem;">Comprehensive Empirical Research Artifacts & Test Results</div>
+                <div style="font-size:0.75rem;color:#475569;margin-top:2px;">
+                    Download individual test matrices, model benchmark tables, McNemar significance tests, and causal refutation datasets, or download the complete consolidated archive.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            zip_bytes = get_research_zip_bytes()
+            st.download_button(
+                label="Download Complete Research Results Bundle (.ZIP Archive)",
+                data=zip_bytes,
+                file_name=f"virtual_biopsy_complete_test_results_{datetime.now().strftime('%Y%m%d')}.zip",
+                mime="application/zip",
+                use_container_width=True
+            )
+
+            st.markdown("<hr style='margin:12px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+
+            c_down1, c_down2 = st.columns(2)
+
+            with c_down1:
+                st.markdown('<div class="card-title-sm"><span>RQ1: All Models Benchmark Comparison</span><span>10-Fold CV</span></div>', unsafe_allow_html=True)
+                bench_path = os.path.join(BASE_PATH, 'outputs/results/all_models_benchmark.csv')
+                if os.path.exists(bench_path):
+                    df_bench = pd.read_csv(bench_path)
+                    st.dataframe(df_bench[['Model','Accuracy','Macro_F1','Macro_Precision','Macro_Recall','Optimal_Threshold']], use_container_width=True, hide_index=True)
+                    st.download_button(
+                        label="Download RQ1 Benchmarks CSV",
+                        data=df_bench.to_csv(index=False).encode('utf-8'),
+                        file_name="rq1_all_models_benchmark.csv",
+                        mime="text/csv",
+                        use_container_width=True
+                    )
+
+            with c_down2:
+                st.markdown('<div class="card-title-sm"><span>Statistical Significance (McNemar Hypothesis Tests)</span><span>Non-Parametric</span></div>', unsafe_allow_html=True)
+                mcnemar_path = os.path.join(BASE_PATH, 'outputs/results/mcnemar_complete_summary.csv')
+                if os.path.exists(mcnemar_path):
+                    df_mcn = pd.read_csv(mcnemar_path)
+                    st.dataframe(df_mcn[['Model Comparison','F1 Difference','Higher Performer','Chi-square','p-value','Significant']], use_container_width=True, hide_index=True)
+                    st.download_button(
+                        label="Download McNemar Tests CSV",
+                        data=df_mcn.to_csv(index=False).encode('utf-8'),
+                        file_name="mcnemar_hypothesis_tests.csv",
+                        mime="text/csv",
+                        use_container_width=True
+                    )
+
+            st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
+            c_down3, c_down4 = st.columns(2)
+
+            with c_down3:
+                st.markdown('<div class="card-title-sm"><span>RQ2: Causal Refutation & Sensitivity Tests</span><span>Placebo & Confounder Invariance</span></div>', unsafe_allow_html=True)
+                ref_path = os.path.join(BASE_PATH, 'outputs/causal_results/causal_statistical_refutation_tests.csv')
+                if os.path.exists(ref_path):
+                    df_ref = pd.read_csv(ref_path)
+                    st.dataframe(df_ref, use_container_width=True, hide_index=True)
+                    st.download_button(
+                        label="Download Causal Refutations CSV",
+                        data=df_ref.to_csv(index=False).encode('utf-8'),
+                        file_name="causal_refutation_tests.csv",
+                        mime="text/csv",
+                        use_container_width=True
+                    )
+
+            with c_down4:
+                st.markdown('<div class="card-title-sm"><span>Actionable Etiologic Root Causes & Targets</span><span>Interventional Guidance</span></div>', unsafe_allow_html=True)
+                treat_path = os.path.join(BASE_PATH, 'outputs/causal_results/treatable_causes.csv')
+                if os.path.exists(treat_path):
+                    df_treat = pd.read_csv(treat_path)
+                    st.dataframe(df_treat, use_container_width=True, hide_index=True)
+                    st.download_button(
+                        label="Download Treatable Causes CSV",
+                        data=df_treat.to_csv(index=False).encode('utf-8'),
+                        file_name="treatable_causes.csv",
+                        mime="text/csv",
+                        use_container_width=True
+                    )
